@@ -14,8 +14,9 @@ def get_data_from_snowflake(month, year):
     )
 
     query = f"""
-        SELECT * FROM GEM_DATA
-        WHERE MONTH = {month} AND YEAR = {year};
+        SELECT *FROM gem_prices
+WHERE EXTRACT(MONTH FROM TIMESTAMP) = {month}
+  AND EXTRACT(YEAR FROM TIMESTAMP) = {year}
     """
     cursor = conn.cursor()
     cursor.execute(query)
