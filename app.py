@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from utils import get_data_from_snowflake
 
 st.set_page_config(page_title="Gem Price Predictor", layout="centered")
-st.title("💎 Gemstone Price Prediction – Model 1")
+st.title(" Gemstone Price Prediction – Model 1")
 
 # User input
 month = st.selectbox("Select Month", list(range(1, 13)))
