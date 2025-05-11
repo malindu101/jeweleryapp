@@ -46,6 +46,13 @@ selected_range = weight_map[weight_option]
 # ✅ Forecasting function
 def forecast_price(data, range_type, target_year, target_month):
     sub = data[data['weight_range'] == range_type].copy()
+    sub = sub.sort_values("timestamp")
+    
+    # Filter last 1 year only
+    latest_date = sub['timestamp'].max()
+    one_year_ago = latest_date - pd.DateOffset(years=1)
+    sub = sub[sub['timestamp'] >= one_year_ago]
+
     sub['Year'] = sub['timestamp'].dt.year
     sub['Month'] = sub['timestamp'].dt.month
 
@@ -63,14 +70,13 @@ def forecast_price(data, range_type, target_year, target_month):
 predicted_price, hist_x, hist_y, trained_model = forecast_price(df, selected_range, year, month)
 st.subheader(f"📊 Predicted Price for {weight_option} in {month}/{year}: **${predicted_price:.2f}**")
 
-# ✅ Historical + forecast trend chart
-# Generate future dates for trendline
+# ✅ Forecast trend line for next 12 months
 last_date = df['timestamp'].max()
 future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=12, freq='MS')
 future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
 future_preds = trained_model.predict(future_X)
 
-# Smooth plotting
+# ✅ Smooth plotting
 def smooth_plot(x, y, label, color, linestyle='-'):
     if len(x) < 4:
         plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -82,10 +88,10 @@ def smooth_plot(x, y, label, color, linestyle='-'):
     x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
     plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
-# Plotting
+# ✅ Plotting
 plt.style.use('seaborn-v0_8-whitegrid')
 fig = plt.figure(figsize=(12, 5))
-smooth_plot(hist_x, hist_y, 'Historical', 'blue')
+smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'blue')
 smooth_plot(future_dates, future_preds, 'Forecast (Next 12 Months)', 'blue', linestyle='--')
 plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
 plt.title(f"Price Trend for Weight Range: {weight_option}")
