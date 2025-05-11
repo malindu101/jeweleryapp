@@ -1,33 +1,45 @@
 import streamlit as st
-import joblib
-import matplotlib.pyplot as plt
-from utils import get_data_from_snowflake
+import snowflake.connector
+import pandas as pd
 
-st.set_page_config(page_title="Gem Price Predictor", layout="centered")
-st.title(" Gemstone Price Prediction – Model 1")
+# Snowflake connection + query
+def get_data_from_snowflake(month, year):
+    conn = snowflake.connector.connect(
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",
+        schema="PUBLIC"
+    )
 
-# User input
+    query = f"""
+        SELECT * FROM gem_prices
+        WHERE EXTRACT(MONTH FROM TIMESTAMP) = {month}
+          AND EXTRACT(YEAR FROM TIMESTAMP) = {year}
+    """
+
+    cursor = conn.cursor()
+    cursor.execute(query)
+    df = cursor.fetch_pandas_all()
+    cursor.close()
+    conn.close()
+    return df
+
+# Streamlit UI
+st.set_page_config(page_title="Gemstone Data Viewer")
+st.title("💠 View Gem Prices from Snowflake")
+
 month = st.selectbox("Select Month", list(range(1, 13)))
 year = st.selectbox("Select Year", list(range(2015, 2026)))
 
-if st.button("Predict"):
-    df = get_data_from_snowflake(month, year)
-    
-    if df.empty:
-        st.warning("No data found for the selected date.")
-    else:
-        model = joblib.load("gem_price_modelsapphire.pkl")
-        X = df[['month', 'year', 'weight']]  # adjust to your model features
-        df['predicted_price'] = model.predict(X)
-
-        # Show results
-        st.subheader("📋 Prediction Table")
-        st.dataframe(df[['weight', 'predicted_price']])
-
-        st.subheader("📊 Predicted Price Chart")
-        fig, ax = plt.subplots()
-        ax.bar(df['weight'].astype(str), df['predicted_price'])
-        ax.set_xlabel("Weight Range")
-        ax.set_ylabel("Price")
-        ax.set_title("Predicted Gemstone Prices")
-        st.pyplot(fig)
+if st.button("Fetch Data"):
+    try:
+        df = get_data_from_snowflake(month, year)
+        if df.empty:
+            st.warning("No data found for this selection.")
+        else:
+            st.success("Data loaded successfully from Snowflake.")
+            st.dataframe(df)
+    except Exception as e:
+        st.error(f"Error fetching data: {e}")
