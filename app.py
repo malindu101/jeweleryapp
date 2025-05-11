@@ -36,7 +36,7 @@ except Exception as e:
 
 # ✅ Sidebar inputs
 st.sidebar.header("🔧 Select Forecast Options")
-year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2031)))
+year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2029)))
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 weight_option = st.sidebar.selectbox("Select Weight Range", ["0.5–2", "2–4", "5–6"])
 weight_map = {"0.5–2": 1, "2–4": 2, "5–6": 3}
@@ -98,7 +98,7 @@ if st.sidebar.button("Confirm Selection"):
     plt.ylabel("Average Price")
     plt.xticks(rotation=45)
     plt.tight_layout()
-    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2)  # 👈 Legend below
+    plt.legend(loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=2)  # 👈 Legend below
     st.pyplot(fig)
 else:
     st.info("Please select options and click 'Confirm Selection' to view prediction.")
