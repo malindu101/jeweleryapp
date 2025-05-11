@@ -16,7 +16,7 @@ if st.button("Predict"):
     if df.empty:
         st.warning("No data found for the selected date.")
     else:
-        model = joblib.load("models/model1.pkl")
+        model = joblib.load("model1.pkl")
         X = df[['month', 'year', 'weight']]  # adjust to your model features
         df['predicted_price'] = model.predict(X)
 
