@@ -69,9 +69,9 @@ if st.sidebar.button("Confirm Selection"):
     predicted_price, hist_x, hist_y, trained_model = forecast_price(df, selected_range, year, month)
     st.subheader(f"📊 Predicted Price for {weight_option} in {month}/{year}: **${predicted_price:.2f}**")
 
-    # ✅ Future forecast
+    # ✅ Future forecast (3 years = 36 months)
     last_date = df['timestamp'].max()
-    future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=12, freq='MS')
+    future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=36, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
     future_preds = trained_model.predict(future_X)
 
@@ -91,14 +91,14 @@ if st.sidebar.button("Confirm Selection"):
     plt.style.use('seaborn-v0_8-whitegrid')
     fig = plt.figure(figsize=(12, 5))
     smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'blue')
-    smooth_plot(future_dates, future_preds, 'Forecast (Next 12 Months)', 'blue', linestyle='--')
+    smooth_plot(future_dates, future_preds, 'Forecast (Next 3 Years)', 'blue', linestyle='--')
     plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
     plt.title(f"Price Trend for Weight Range: {weight_option}")
     plt.xlabel("Month")
     plt.ylabel("Average Price")
     plt.xticks(rotation=45)
-    plt.legend()
     plt.tight_layout()
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2)  # 👈 Legend below
     st.pyplot(fig)
 else:
-    st.info("Please select options and click '✅ Confirm Selection' to view prediction.")
+    st.info("Please select options and click 'Confirm Selection' to view prediction.")
