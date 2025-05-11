@@ -24,6 +24,15 @@ def get_data_from_snowflake():
     conn.close()
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
+# Load data
+df = get_data_from_snowflake()
+
+# ✅ Display a success message
+st.success("Successfully fetched data from Snowflake!")
+
+# ✅ Show first 5 rows
+st.subheader("Sample Data")
+st.dataframe(df.head())
 
 # Forecasting function
 def forecast_price(model, year, month, data):
