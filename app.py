@@ -5,65 +5,72 @@ import matplotlib.pyplot as plt
 from xgboost import XGBRegressor
 from scipy.interpolate import make_interp_spline
 import snowflake.connector
+from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("📈 Sapphire Price Forecasting (Live from Snowflake)")
+st.title("📈 Sapphire Price Forecasting (Live)")
 
-# ✅ Snowflake connection
+# ✅ Connect to Snowflake
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-        user="MOW101",
-        password="Killme@20021128123123",
-        account="KWLEACZ-DX82931",
-        warehouse="COMPUTE_WH",
-        database="SAPPHIRE",
-        schema="PUBLIC"
+        user=st.secrets["snowflake"]["user"],
+        password=st.secrets["snowflake"]["password"],
+        account=st.secrets["snowflake"]["account"],
+        warehouse=st.secrets["snowflake"]["warehouse"],
+        database=st.secrets["snowflake"]["database"],
+        schema=st.secrets["snowflake"]["schema"]
     )
     query = "SELECT * FROM SAPPHIRE_PRICE"
     df = pd.read_sql(query, conn)
     conn.close()
-    
-    df.columns = df.columns.str.lower()  # ✅ Normalize to lowercase
-    df['timestamp'] = pd.to_datetime(df['timestamp'])  # ✅ Safe access
+    df.columns = df.columns.str.lower()
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
+# ✅ Load data
 try:
     df = get_data_from_snowflake()
-    st.success("✅ Connected to Snowflake and retrieved data successfully!")
+    st.success("✅ Successfully fetched data from Snowflake!")
 except Exception as e:
     st.error(f"❌ Failed to fetch data: {e}")
     st.stop()
 
-# Group monthly
-monthly = df.groupby([pd.Grouper(key='timestamp', freq='MS'), 'weight_range'])['price'].mean().reset_index()
+# ✅ Sidebar inputs
+st.sidebar.header("🔧 Select Forecast Options")
+year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2031)))
+month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
+weight_option = st.sidebar.selectbox("Select Weight Range", ["0.5–2", "2–4", "5–6"])
+weight_map = {"0.5–2": 1, "2–4": 2, "5–6": 3}
+selected_range = weight_map[weight_option]
 
-# Filter to last 1 year
-latest_date = monthly['timestamp'].max()
-one_year_ago = latest_date - pd.DateOffset(years=1)
-monthly_filtered = monthly[monthly['timestamp'] >= one_year_ago]
-
-# Forecasting function
-def predict_xgb(data, range_type, future_months=12):
+# ✅ Forecasting function
+def forecast_price(data, range_type, target_year, target_month):
     sub = data[data['weight_range'] == range_type].copy()
     sub['Year'] = sub['timestamp'].dt.year
     sub['Month'] = sub['timestamp'].dt.month
+
     X = sub[['Year', 'Month']]
     y = sub['price']
     model = XGBRegressor(n_estimators=100)
     model.fit(X, y)
 
-    last_date = sub['timestamp'].max()
-    future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=future_months, freq='MS')
-    future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
-    preds = model.predict(future_X)
-    return sub['timestamp'], y, future_dates, preds
+    # Predict
+    input_df = pd.DataFrame([[target_year, target_month]], columns=['Year', 'Month'])
+    prediction = model.predict(input_df)
+    return prediction[0], sub['timestamp'], y, model
 
-# Forecast for all types
-t1_x, t1_y, f1_x, f1_y = predict_xgb(monthly_filtered, 1)
-t2_x, t2_y, f2_x, f2_y = predict_xgb(monthly_filtered, 2)
-t3_x, t3_y, f3_x, f3_y = predict_xgb(monthly_filtered, 3)
+# ✅ Run forecast
+predicted_price, hist_x, hist_y, trained_model = forecast_price(df, selected_range, year, month)
+st.subheader(f"📊 Predicted Price for {weight_option} in {month}/{year}: **${predicted_price:.2f}**")
 
-# Plotting
+# ✅ Historical + forecast trend chart
+# Generate future dates for trendline
+last_date = df['timestamp'].max()
+future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=12, freq='MS')
+future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
+future_preds = trained_model.predict(future_X)
+
+# Smooth plotting
 def smooth_plot(x, y, label, color, linestyle='-'):
     if len(x) < 4:
         plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -75,35 +82,16 @@ def smooth_plot(x, y, label, color, linestyle='-'):
     x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
     plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
-# Styling
+# Plotting
 plt.style.use('seaborn-v0_8-whitegrid')
-plt.rcParams.update({
-    'axes.edgecolor': 'gray',
-    'axes.labelsize': 12,
-    'axes.titlesize': 14,
-    'xtick.labelsize': 10,
-    'ytick.labelsize': 10,
-    'legend.fontsize': 10,
-    'figure.titlesize': 15,
-    'axes.titlepad': 15,
-    'lines.linewidth': 2,
-    'lines.markersize': 6,
-    'figure.facecolor': 'white'
-})
-
-# Final Plot
-fig = plt.figure(figsize=(14, 6))
-smooth_plot(t1_x, t1_y, 'Type 1 - Historical', 'blue')
-smooth_plot(f1_x, f1_y, 'Type 1 - Forecast', 'blue', linestyle='--')
-smooth_plot(t2_x, t2_y, 'Type 2 - Historical', 'green')
-smooth_plot(f2_x, f2_y, 'Type 2 - Forecast', 'green', linestyle='--')
-smooth_plot(t3_x, t3_y, 'Type 3 - Historical', 'red')
-smooth_plot(f3_x, f3_y, 'Type 3 - Forecast', 'red', linestyle='--')
-plt.title('Sapphire Price Forecast')
-plt.xlabel('Month')
-plt.ylabel('Average Price')
-plt.grid(True)
-plt.legend()
+fig = plt.figure(figsize=(12, 5))
+smooth_plot(hist_x, hist_y, 'Historical', 'blue')
+smooth_plot(future_dates, future_preds, 'Forecast (Next 12 Months)', 'blue', linestyle='--')
+plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
+plt.title(f"Price Trend for Weight Range: {weight_option}")
+plt.xlabel("Month")
+plt.ylabel("Average Price")
 plt.xticks(rotation=45)
+plt.legend()
 plt.tight_layout()
 st.pyplot(fig)
