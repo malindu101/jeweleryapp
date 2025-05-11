@@ -12,12 +12,12 @@ models = joblib.load("sapphire_xgb_models.pkl")
 # Snowflake connection
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-         user=["user"],
-        password=["password"],
-        account=["account"],
-        warehouse=["warehouse"],
-        database=["database"],
-        schema=["schema"]
+         user=["MOW101"],
+        password=["Killme@20021128123123"],
+        account=["KWLEACZ-DX82931"],
+        warehouse=["COMPUTE_WH"],
+        database=["SAPPHIRE"],
+        schema=["PUBLIC"]
     )
     query = "SELECT WEIGHT, PRICE, TIMESTAMP, WEIGHT_RANGE FROM SAPPHIRE_PRICE"
     df = pd.read_sql(query, conn)
