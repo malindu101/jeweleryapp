@@ -1,84 +1,30 @@
 import streamlit as st
 import pandas as pd
-import xgboost as xgb
-import joblib
 import snowflake.connector
-import matplotlib.pyplot as plt
-from datetime import datetime
-
-# Load models
-models = joblib.load("sapphire_xgb_models.pkl")
 
 # Snowflake connection
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-         user=["MOW101"],
-        password=["Killme@20021128123123"],
-        account=["KWLEACZ-DX82931"],
-        warehouse=["COMPUTE_WH"],
-        database=["SAPPHIRE"],
-        schema=["PUBLIC"]
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",
+        schema="PUBLIC"
     )
-    query = "SELECT WEIGHT, PRICE, TIMESTAMP, WEIGHT_RANGE FROM SAPPHIRE_PRICE"
+    query = "SELECT * FROM SAPPHIRE_PRICE"
     df = pd.read_sql(query, conn)
     conn.close()
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'])
     return df
-# Load data
-df = get_data_from_snowflake()
 
-# ✅ Display a success message
-st.success("Successfully fetched data from Snowflake!")
+# Streamlit UI
+st.title("Sapphire Price Data Viewer")
 
-# ✅ Show first 5 rows
-st.subheader("Sample Data")
-st.dataframe(df.head())
-
-# Forecasting function
-def forecast_price(model, year, month, data):
-    model_data = data.copy()
-    model_data['Year'] = model_data['timestamp'].dt.year
-    model_data['Month'] = model_data['timestamp'].dt.month
-    X = model_data[['Year', 'Month']]
-    
-    # Predict for selected future date
-    prediction = model.predict(pd.DataFrame([[year, month]], columns=['Year', 'Month']))
-    return prediction[0]
-
-# UI
-st.title("Gemstone Price Forecasting")
-
-# Sidebar inputs
-year = st.selectbox("Select Year", list(range(datetime.now().year + 1, 2031)))
-month = st.selectbox("Select Month", list(range(1, 13)))
-weight_range = st.selectbox("Select Weight Range", ["0.5-2", "2-4", "5-6"])
-
-# Load data and map to model
-df = get_data_from_snowflake()
-
-range_map = {
-    "0.5-2": 1,
-    "2-4": 2,
-    "5-6": 3
-}
-model_key = range_map[weight_range]
-model = models[model_key]
-
-# Filter for historical chart
-historical = df[df['WEIGHT_RANGE'] == model_key]
-historical = historical.groupby(pd.Grouper(key='timestamp', freq='M'))['PRICE'].mean().reset_index()
-
-# Predict
-if st.button("Forecast Price"):
-    price = forecast_price(model, year, month, historical)
-    st.success(f"Predicted Price for {month}/{year}: ${price:.2f}")
-
-    # Plot historical data
-    plt.figure(figsize=(10, 4))
-    plt.plot(historical['timestamp'], historical['PRICE'], marker='o')
-    plt.axvline(datetime(year, month, 1), color='red', linestyle='--', label='Forecast Point')
-    plt.title(f"Historical Prices for {weight_range}")
-    plt.xlabel("Date")
-    plt.ylabel("Average Price")
-    plt.legend()
-    st.pyplot(plt)
+# Load and show data
+try:
+    df = get_data_from_snowflake()
+    st.success("Successfully fetched data from Snowflake!")
+    st.dataframe(df)
+except Exception as e:
+    st.error(f"Error fetching data: {e}")
