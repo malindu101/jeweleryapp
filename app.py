@@ -8,7 +8,7 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("📈 Sapphire Price Forecasting (Live from Snowflake)")
+st.title(" Sapphire Price Forecasting (Live from Snowflake)")
 
 # ✅ Connect to Snowflake
 def get_data_from_snowflake():
@@ -43,7 +43,7 @@ weight_map = {"0.5–2": 1, "2–4": 2, "5–6": 3}
 selected_range = weight_map[weight_option]
 
 # ✅ Confirm Button
-if st.sidebar.button("✅ Confirm Selection"):
+if st.sidebar.button("Confirm Selection"):
     # ✅ Forecasting function (trained on last 1 year of data)
     def forecast_price(data, range_type, target_year, target_month):
         sub = data[data['weight_range'] == range_type].copy()
