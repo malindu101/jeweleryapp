@@ -34,7 +34,7 @@ except Exception as e:
     st.error(f"❌ Failed to fetch data: {e}")
     st.stop()
 
-#  Sidebar inputs
+# ✅ Sidebar inputs
 st.sidebar.header("🔧 Select Forecast Options")
 year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2031)))
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
@@ -42,9 +42,9 @@ weight_option = st.sidebar.selectbox("Select Weight Range", ["0.5–2", "2–4",
 weight_map = {"0.5–2": 1, "2–4": 2, "5–6": 3}
 selected_range = weight_map[weight_option]
 
-#  Confirm Button
-if st.sidebar.button(" Confirm Selection"):
-    #  Forecasting function (trained on last 1 year of data)
+# ✅ Confirm Button
+if st.sidebar.button("✅ Confirm Selection"):
+    # ✅ Forecasting function (trained on last 1 year of data)
     def forecast_price(data, range_type, target_year, target_month):
         sub = data[data['weight_range'] == range_type].copy()
         sub = sub.sort_values("timestamp")
@@ -65,17 +65,17 @@ if st.sidebar.button(" Confirm Selection"):
         prediction = model.predict(input_df)
         return prediction[0], sub['timestamp'], y, model
 
-    #  Run forecast
+    # ✅ Run forecast
     predicted_price, hist_x, hist_y, trained_model = forecast_price(df, selected_range, year, month)
     st.subheader(f"📊 Predicted Price for {weight_option} in {month}/{year}: **${predicted_price:.2f}**")
 
-    #  Future forecast
+    # ✅ Future forecast
     last_date = df['timestamp'].max()
     future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=12, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
     future_preds = trained_model.predict(future_X)
 
-    #  Smooth plot
+    # ✅ Smooth plot
     def smooth_plot(x, y, label, color, linestyle='-'):
         if len(x) < 4:
             plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -87,18 +87,18 @@ if st.sidebar.button(" Confirm Selection"):
         x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
         plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
-    # Plotting
-
-plt.style.use('seaborn-v0_8-whitegrid')
-fig = plt.figure(figsize=(12, 5))
-smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'blue')
-smooth_plot(future_dates, future_preds, 'Forecast (Next 12 Months)', 'blue', linestyle='--')
-plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
-plt.title(f"Price Trend for Weight Range: {weight_option}")
-plt.xlabel("Month")
-plt.ylabel("Average Price")
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.15), ncol=2)  
-st.pyplot(fig)
-
+    # ✅ Plotting
+    plt.style.use('seaborn-v0_8-whitegrid')
+    fig = plt.figure(figsize=(12, 5))
+    smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'blue')
+    smooth_plot(future_dates, future_preds, 'Forecast (Next 12 Months)', 'blue', linestyle='--')
+    plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
+    plt.title(f"Price Trend for Weight Range: {weight_option}")
+    plt.xlabel("Month")
+    plt.ylabel("Average Price")
+    plt.xticks(rotation=45)
+    plt.legend()
+    plt.tight_layout()
+    st.pyplot(fig)
+else:
+    st.info("Please select options and click '✅ Confirm Selection' to view prediction.")
