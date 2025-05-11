@@ -8,7 +8,7 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("Sapphire Price Forecasting (Live)")
+st.title("📈 Sapphire Price Forecasting (Live from Snowflake)")
 
 # ✅ Connect to Snowflake
 def get_data_from_snowflake():
@@ -27,7 +27,12 @@ def get_data_from_snowflake():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
-
+# ✅ Load data (no success message shown)
+try:
+    df = get_data_from_snowflake()
+except Exception as e:
+    st.error(f"❌ Failed to fetch data: {e}")
+    st.stop()
 
 # ✅ Sidebar inputs
 st.sidebar.header("🔧 Select Forecast Options")
@@ -37,12 +42,12 @@ weight_option = st.sidebar.selectbox("Select Weight Range", ["0.5–2", "2–4",
 weight_map = {"0.5–2": 1, "2–4": 2, "5–6": 3}
 selected_range = weight_map[weight_option]
 
-# ✅ Forecasting function
+# ✅ Forecasting function (trained on last 1 year of data)
 def forecast_price(data, range_type, target_year, target_month):
     sub = data[data['weight_range'] == range_type].copy()
     sub = sub.sort_values("timestamp")
-    
-    # Filter last 1 year only
+
+    # Only last 1 year
     latest_date = sub['timestamp'].max()
     one_year_ago = latest_date - pd.DateOffset(years=1)
     sub = sub[sub['timestamp'] >= one_year_ago]
@@ -55,7 +60,6 @@ def forecast_price(data, range_type, target_year, target_month):
     model = XGBRegressor(n_estimators=100)
     model.fit(X, y)
 
-    # Predict
     input_df = pd.DataFrame([[target_year, target_month]], columns=['Year', 'Month'])
     prediction = model.predict(input_df)
     return prediction[0], sub['timestamp'], y, model
@@ -64,13 +68,13 @@ def forecast_price(data, range_type, target_year, target_month):
 predicted_price, hist_x, hist_y, trained_model = forecast_price(df, selected_range, year, month)
 st.subheader(f"📊 Predicted Price for {weight_option} in {month}/{year}: **${predicted_price:.2f}**")
 
-# ✅ Forecast trend line for next 12 months
+# ✅ Future forecast
 last_date = df['timestamp'].max()
 future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=12, freq='MS')
 future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
 future_preds = trained_model.predict(future_X)
 
-# ✅ Smooth plotting
+# ✅ Smooth plot
 def smooth_plot(x, y, label, color, linestyle='-'):
     if len(x) < 4:
         plt.plot(x, y, label=label, color=color, linestyle=linestyle)
