@@ -1,86 +1,75 @@
 import streamlit as st
 import pandas as pd
-import snowflake.connector
 import xgboost as xgb
+import joblib
+import snowflake.connector
 import matplotlib.pyplot as plt
-from sklearn.model_selection import train_test_split
+from datetime import datetime
 
-# Step 1: Fetch data from Snowflake
-def fetch_data():
+# Load models
+models = joblib.load("sapphire_xgb_models.pkl")
+
+# Snowflake connection
+def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-        user="MOW101",
-        password="Killme@20021128123123",
-        account="KWLEACZ-DX82931",
-        warehouse="COMPUTE_WH",
-        database="SAPPHIRE",
-        schema="PUBLIC"
+        user='YOUR_USERNAME',
+        password='YOUR_PASSWORD',
+        account='YOUR_ACCOUNT_URL',
+        warehouse='YOUR_WAREHOUSE',
+        database='YOUR_DATABASE',
+        schema='YOUR_SCHEMA'
     )
-    query = "SELECT * FROM SAPPHIRE_PRICE"
-    cursor = conn.cursor()
-    cursor.execute(query)
-    df = cursor.fetch_pandas_all()
-    cursor.close()
+    query = "SELECT WEIGHT, PRICE, TIMESTAMP, WEIGHT_RANGE FROM YOUR_TABLE_NAME"
+    df = pd.read_sql(query, conn)
     conn.close()
+    df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
-# Step 2: Train XGBoost models for each weight range
-def train_models(df):
-    df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'])
-    df['month'] = df['TIMESTAMP'].dt.month
-    df['year'] = df['TIMESTAMP'].dt.year
+# Forecasting function
+def forecast_price(model, year, month, data):
+    model_data = data.copy()
+    model_data['Year'] = model_data['timestamp'].dt.year
+    model_data['Month'] = model_data['timestamp'].dt.month
+    X = model_data[['Year', 'Month']]
+    
+    # Predict for selected future date
+    prediction = model.predict(pd.DataFrame([[year, month]], columns=['Year', 'Month']))
+    return prediction[0]
 
-    models = {}
-    trend_data = {}
+# UI
+st.title("Gemstone Price Forecasting")
 
-    for weight_range in df['WEIGHT_RANGE'].unique():
-        sub_df = df[df['WEIGHT_RANGE'] == weight_range]
-        X = sub_df[['year', 'month']]
-        y = sub_df['PRICE']
-        
-        model = xgb.XGBRegressor(objective='reg:squarederror', n_estimators=100)
-        model.fit(X, y)
-        
-        models[weight_range] = model
-        trend_data[weight_range] = sub_df.groupby(['year', 'month'])['PRICE'].mean().reset_index()
+# Sidebar inputs
+year = st.selectbox("Select Year", list(range(datetime.now().year + 1, 2031)))
+month = st.selectbox("Select Month", list(range(1, 13)))
+weight_range = st.selectbox("Select Weight Range", ["0.5-2", "2-4", "5-6"])
 
-    return models, trend_data
+# Load data and map to model
+df = get_data_from_snowflake()
 
-# Step 3: Streamlit App
-st.set_page_config(page_title="Gemstone Price Predictor", layout="wide")
-st.title("💎 XGBoost Gemstone Price Forecast (from Snowflake)")
+range_map = {
+    "0.5-2": 1,
+    "2-4": 2,
+    "5-6": 3
+}
+model_key = range_map[weight_range]
+model = models[model_key]
 
-selected_year = st.selectbox("Select Year", list(range(2026, 2031)))
-selected_month = st.selectbox("Select Month", list(range(1, 13)))
-selected_range = st.selectbox("Select Weight Range", ["0.5-2", "2-4", "5-6"])
+# Filter for historical chart
+historical = df[df['WEIGHT_RANGE'] == model_key]
+historical = historical.groupby(pd.Grouper(key='timestamp', freq='M'))['PRICE'].mean().reset_index()
 
-if st.button("Predict Price"):
-    try:
-        df = fetch_data()
-        models, trend_data = train_models(df)
+# Predict
+if st.button("Forecast Price"):
+    price = forecast_price(model, year, month, historical)
+    st.success(f"Predicted Price for {month}/{year}: ${price:.2f}")
 
-        input_df = pd.DataFrame({
-            'year': [selected_year],
-            'month': [selected_month]
-        })
-
-        # Predict using the appropriate model
-        model = models[selected_range]
-        predicted_price = model.predict(input_df)[0]
-
-        st.success(f"📈 Predicted Price for {selected_range} in {selected_year}-{selected_month:02d}: ${predicted_price:.2f}")
-
-        # Show historical trend
-        trend_df = trend_data[selected_range]
-        trend_df['date'] = pd.to_datetime(trend_df[['year', 'month']].assign(day=1))
-
-        fig, ax = plt.subplots()
-        ax.plot(trend_df['date'], trend_df['PRICE'], label='Historical Price')
-        ax.axvline(pd.to_datetime(f"{selected_year}-{selected_month:02d}-01"), color='red', linestyle='--', label='Prediction Month')
-        ax.set_title(f"Price Trend for Weight Range {selected_range}")
-        ax.set_xlabel("Date")
-        ax.set_ylabel("Average Price")
-        ax.legend()
-        st.pyplot(fig)
-
-    except Exception as e:
-        st.error(f"❌ Error: {e}")
+    # Plot historical data
+    plt.figure(figsize=(10, 4))
+    plt.plot(historical['timestamp'], historical['PRICE'], marker='o')
+    plt.axvline(datetime(year, month, 1), color='red', linestyle='--', label='Forecast Point')
+    plt.title(f"Historical Prices for {weight_range}")
+    plt.xlabel("Date")
+    plt.ylabel("Average Price")
+    plt.legend()
+    st.pyplot(plt)
