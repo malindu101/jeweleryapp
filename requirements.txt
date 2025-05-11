@@ -1,5 +1,7 @@
 streamlit
-joblib
-pandas
-matplotlib
 snowflake-connector-python
+xgboost
+matplotlib
+pandas
+scikit-learn
+seaborn
