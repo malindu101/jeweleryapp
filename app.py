@@ -12,7 +12,6 @@ st.title("📈 Sapphire Price Forecasting (Live from Snowflake)")
 # ✅ Snowflake connection
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-        conn = snowflake.connector.connect(
         user="MOW101",
         password="Killme@20021128123123",
         account="KWLEACZ-DX82931",
