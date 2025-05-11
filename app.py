@@ -8,7 +8,7 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title(" Sapphire Price Forecasting (Live from Snowflake)")
+st.title(" Sapphire Live Price Forecasting ")
 
 # ✅ Connect to Snowflake
 def get_data_from_snowflake():
