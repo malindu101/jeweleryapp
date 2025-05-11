@@ -5,12 +5,12 @@ import pandas as pd
 def get_data_from_snowflake(month, year):
     creds = st.secrets["snowflake"]
     conn = snowflake.connector.connect(
-        user=creds["user"],
-        password=creds["password"],
-        account=creds["account"],
-        warehouse=creds["warehouse"],
-        database=creds["database"],
-        schema=creds["schema"]
+        user=creds["MOW101"],
+        password=creds["Killme@20021128123123"],
+        account=creds["KWLEACZ-DX82931"],
+        warehouse=creds["COMPUTE_WH"],
+        database=creds["SAPPHIRE"],
+        schema=creds["PUBLIC"]
     )
 
     query = f"""
