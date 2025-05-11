@@ -8,7 +8,7 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("📈 Sapphire Price Forecasting (Live)")
+st.title("Sapphire Price Forecasting (Live)")
 
 # ✅ Connect to Snowflake
 def get_data_from_snowflake():
@@ -27,13 +27,7 @@ def get_data_from_snowflake():
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     return df
 
-# ✅ Load data
-try:
-    df = get_data_from_snowflake()
-    st.success("✅ Successfully fetched data from Snowflake!")
-except Exception as e:
-    st.error(f"❌ Failed to fetch data: {e}")
-    st.stop()
+
 
 # ✅ Sidebar inputs
 st.sidebar.header("🔧 Select Forecast Options")
