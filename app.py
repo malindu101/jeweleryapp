@@ -13,7 +13,7 @@ def get_data_from_snowflake():
         schema="PUBLIC"
     )
 
-    query = "SELECT * FROM gem_prices"
+    query = "SELECT * FROM SAPPHIRE_PRICE"
     cursor = conn.cursor()
     cursor.execute(query)
     df = cursor.fetch_pandas_all()
