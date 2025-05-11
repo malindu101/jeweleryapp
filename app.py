@@ -2,15 +2,15 @@ import streamlit as st
 import snowflake.connector
 import pandas as pd
 
-# Hardcoded Snowflake credentials
 def get_data_from_snowflake():
+    creds = st.secrets["snowflake"]
     conn = snowflake.connector.connect(
-        user="MOW101",
-        password="Killme@20021128123123",
-        account="KWLEACZ-DX82931",
-        warehouse="COMPUTE_WH",
-        database="SAPPHIRE",
-        schema="PUBLIC"
+        user=creds["user"],
+        password=creds["password"],
+        account=creds["account"],
+        warehouse=creds["warehouse"],
+        database=creds["database"],
+        schema=creds["schema"]
     )
 
     query = "SELECT * FROM SAPPHIRE_PRICE"
