@@ -13,12 +13,12 @@ st.title("📈 Sapphire Price Forecasting (Live)")
 # ✅ Connect to Snowflake
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
-        user=st.secrets["snowflake"]["user"],
-        password=st.secrets["snowflake"]["password"],
-        account=st.secrets["snowflake"]["account"],
-        warehouse=st.secrets["snowflake"]["warehouse"],
-        database=st.secrets["snowflake"]["database"],
-        schema=st.secrets["snowflake"]["schema"]
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",
+        schema="PUBLIC"
     )
     query = "SELECT * FROM SAPPHIRE_PRICE"
     df = pd.read_sql(query, conn)
