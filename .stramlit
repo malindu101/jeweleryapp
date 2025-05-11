@@ -1,8 +1,0 @@
-[snowflake]
-user = "MOW101"
-password = "Killme@20021128123123"
-account = "KWLEACZ-DX82931"
-warehouse = "COMPUTE_WH"
-database = "SAPPHIRE"
-schema = "PUBLIC"
-
