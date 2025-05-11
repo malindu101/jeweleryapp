@@ -97,8 +97,9 @@ if st.sidebar.button("Confirm Selection"):
     plt.xlabel("Month")
     plt.ylabel("Average Price")
     plt.xticks(rotation=45)
-    plt.tight_layout()
-    plt.legend(loc='lower center', bbox_to_anchor=(0.5, -0.15), ncol=2)  # 👈 Legend below
+    plt.tight_layout(rect=[0, 0.1, 1, 1])  # Leave more room at the bottom
+    plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=1, frameon=False)
     st.pyplot(fig)
+
 else:
     st.info("Please select options and click 'Confirm Selection' to view prediction.")
