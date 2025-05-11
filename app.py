@@ -19,10 +19,12 @@ def get_data_from_snowflake():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    query = "SELECT timestamp, weight_range, price FROM SAPPHIRE_PRICE"
+    query = "SELECT * FROM SAPPHIRE_PRICE"
     df = pd.read_sql(query, conn)
     conn.close()
-    df['timestamp'] = pd.to_datetime(df['timestamp'])
+    
+    df.columns = df.columns.str.lower()  # ✅ Normalize to lowercase
+    df['timestamp'] = pd.to_datetime(df['timestamp'])  # ✅ Safe access
     return df
 
 try:
