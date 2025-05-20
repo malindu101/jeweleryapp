@@ -17,7 +17,7 @@ def get_data_from_snowflake():
         database="SAPPHIRE",         
         schema="PUBLIC"
     )
-    query = "SELECT * COLORTREND"
+    query = "SELECT * FROM COLORTREND"
     df = pd.read_sql(query, conn)
     conn.close()
     df.columns = df.columns.str.lower()
