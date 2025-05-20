@@ -8,9 +8,9 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("🪙 Gold Price Forecasting in LKR")
+st.title("🪙 Gold Live Price Forecasting")
 
-# Connect to Snowflake and load data
+# Connect to Snowflake
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
         user="MOW101",
@@ -23,18 +23,14 @@ def get_data_from_snowflake():
     query = "SELECT * FROM GOLD_PRICE"
     df = pd.read_sql(query, conn)
     conn.close()
-
-    # Clean and format
-    df.columns = df.columns.str.strip().str.lower()
-    df.rename(columns={'gold price / lkr': 'price'}, inplace=True)
-    df['date'] = pd.to_datetime(df['date'], format='%m/%d/%Y', errors='coerce')
-    df.dropna(subset=['date', 'price'], inplace=True)
-    df['price'] = pd.to_numeric(df['price'], errors='coerce')
-    df.dropna(subset=['price'], inplace=True)
+    df.columns = df.columns.str.lower()
+    df['date'] = pd.to_datetime(df['date'])
+    df.dropna(subset=['date', 'gold price /lkr'], inplace=True)
+    df['price'] = df['gold price /lkr'].astype(float)
     return df
 
-# Sidebar controls
-st.sidebar.header("🔧 Forecast Options")
+# Sidebar UI
+st.sidebar.header("🔧 Select Forecast Options")
 year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
@@ -42,40 +38,38 @@ month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 try:
     df = get_data_from_snowflake()
 except Exception as e:
-    st.error(f"❌ Failed to load data from Snowflake: {e}")
+    st.error(f"❌ Failed to fetch data: {e}")
     st.stop()
 
+# Confirm Button logic
 if st.sidebar.button("Confirm Selection"):
 
     def forecast_price(data, target_year, target_month):
         data = data.sort_values("date")
-        data['Year'] = data['date'].dt.year
-        data['Month'] = data['date'].dt.month
-
-        # Use last 1 year of data
-        one_year_ago = data['date'].max() - pd.DateOffset(years=1)
+        latest_date = data['date'].max()
+        one_year_ago = latest_date - pd.DateOffset(years=1)
         recent = data[data['date'] >= one_year_ago]
-
+        recent['Year'] = recent['date'].dt.year
+        recent['Month'] = recent['date'].dt.month
         X = recent[['Year', 'Month']]
         y = recent['price']
-
         model = XGBRegressor(n_estimators=100)
         model.fit(X, y)
-
-        # Forecast input
         input_df = pd.DataFrame([[target_year, target_month]], columns=['Year', 'Month'])
         prediction = model.predict(input_df)
         return prediction[0], recent['date'], y, model
 
+    # Perform prediction
     predicted_price, hist_x, hist_y, trained_model = forecast_price(df, year, month)
+    st.subheader(f"📊 Predicted Gold Price for {month}/{year}: **LKR {predicted_price:,.2f}**")
 
-    st.subheader(f"📊 Forecasted Gold Price for {month}/{year}: **LKR {predicted_price:,.2f}**")
-
-    # Generate future forecast
-    future_dates = pd.date_range(start=df['date'].max() + pd.DateOffset(months=1), periods=36, freq='MS')
+    # Future forecast range
+    last_date = df['date'].max()
+    future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=36, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
     future_preds = trained_model.predict(future_X)
 
+    # Smooth plot function
     def smooth_plot(x, y, label, color, linestyle='-'):
         if len(x) < 4:
             plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -92,14 +86,14 @@ if st.sidebar.button("Confirm Selection"):
     fig = plt.figure(figsize=(12, 5))
     smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'goldenrod')
     smooth_plot(future_dates, future_preds, 'Forecast (Next 3 Years)', 'gold', linestyle='--')
-    plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Forecasted Month')
-    plt.title("Gold Price Forecast Trend")
-    plt.xlabel("Date")
-    plt.ylabel("Gold Price (LKR)")
+    plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
+    plt.title(f"Gold Price Trend Forecast")
+    plt.xlabel("Month")
+    plt.ylabel("Price (LKR)")
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0.1, 1, 1])
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=1, frameon=False)
     st.pyplot(fig)
 
 else:
-    st.info("Please select a month and year, then click 'Confirm Selection' to forecast gold price.")
+    st.info("Please select a month and year, then click 'Confirm Selection' to view the forecast.") 
