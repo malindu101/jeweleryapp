@@ -10,12 +10,12 @@ from collections import Counter
 @st.cache_data
 def load_data():
     conn = snowflake.connector.connect(
-        user='YOUR_USER',
-        password='YOUR_PASSWORD',
-        account='YOUR_ACCOUNT',
-        warehouse='YOUR_WAREHOUSE',
-        database='YOUR_DATABASE',
-        schema='YOUR_SCHEMA'
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",         # Same DB
+        schema="PUBLIC"
     )
     query = "SELECT * FROM user_behavior_1000_rows_final"
     df = pd.read_sql(query, conn)
