@@ -16,7 +16,7 @@ def load_data_from_snowflake():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    query = "SELECT * FROM GOLD_PRICE"
+    query = "SELECT * FROM Gold Price /LKR"
     df = pd.read_sql(query, conn)
     conn.close()
 
