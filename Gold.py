@@ -24,11 +24,16 @@ def get_data_from_snowflake():
     df = pd.read_sql(query, conn)
     conn.close()
 
-    # Standardize column names and types
-    df.columns = df.columns.str.strip().str.lower()
-    df.rename(columns={'date': 'timestamp', 'gold price / lkr': 'price'}, inplace=True)
+    # Rename columns to standardized names
+    df.rename(columns={
+        'DATE': 'timestamp',
+        'Gold Price /LKR': 'price'
+    }, inplace=True)
+
+    # Convert data types
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df['price'] = df['price'].astype(float)
+
     return df
 
 # Sidebar input for forecast target
@@ -36,7 +41,7 @@ st.sidebar.header("🔧 Select Forecast Options")
 year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2029)))
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
-# Load the data
+# Load and process the data
 try:
     df = get_data_from_snowflake()
 except Exception as e:
@@ -67,13 +72,13 @@ if st.sidebar.button("Confirm Selection"):
     predicted_price, hist_x, hist_y, trained_model = forecast_price(df, year, month)
     st.subheader(f"📊 Predicted Price in {month}/{year}: **LKR {predicted_price:,.2f}**")
 
-    # Future forecast curve
+    # Generate future predictions for the chart
     last_date = df['timestamp'].max()
     future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=36, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
     future_preds = trained_model.predict(future_X)
 
-    # Plotting
+    # Smooth line plot function
     def smooth_plot(x, y, label, color, linestyle='-'):
         if len(x) < 4:
             plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -85,6 +90,7 @@ if st.sidebar.button("Confirm Selection"):
         x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
         plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
+    # Plot the forecast
     plt.style.use('seaborn-v0_8-whitegrid')
     fig = plt.figure(figsize=(12, 5))
     smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'goldenrod')
@@ -100,3 +106,4 @@ if st.sidebar.button("Confirm Selection"):
 
 else:
     st.info("ℹ️ Please select options and click 'Confirm Selection' to view prediction.")
+
