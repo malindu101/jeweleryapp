@@ -53,8 +53,8 @@ df = load_data_from_snowflake()
 xgb_model = train_xgboost(df)
 
 # Selection inputs
-years = st.multiselect("📅 Select Years", [2026, 2027, 2028], default=[2026])
-months = st.multiselect("📆 Select Months", list(range(1, 13)), default=[1, 6, 12])
+year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
+month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
 # Prediction button
 if st.button("✅ Predict with XGBoost"):
