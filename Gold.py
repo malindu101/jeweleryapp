@@ -9,12 +9,12 @@ import snowflake.connector
 @st.cache_data
 def load_data_from_snowflake():
     conn = snowflake.connector.connect(
-        user='YOUR_USERNAME',
-        password='YOUR_PASSWORD',
-        account='YOUR_ACCOUNT',
-        warehouse='YOUR_WAREHOUSE',
-        database='YOUR_DATABASE',
-        schema='YOUR_SCHEMA'
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",
+        schema="PUBLIC"
     )
     query = "SELECT Date, `Gold Price  / LKR` AS Gold_Price_LKR FROM GOLD_TABLE_NAME"
     df = pd.read_sql(query, conn)
