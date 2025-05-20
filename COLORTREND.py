@@ -42,7 +42,7 @@ except Exception as e:
 df['year'] = df['date'].dt.year
 df['month'] = df['date'].dt.month
 
-# Melt the top colors into one column
+# Melt top color columns
 df_melted = pd.melt(
     df,
     id_vars=['date', 'year', 'month'],
@@ -52,17 +52,16 @@ df_melted = pd.melt(
 )
 df_melted.dropna(subset=['color'], inplace=True)
 
-# Filter 4-year window (2 past + 2 future)
+# Limit to past 2 years
 today = datetime.now()
 cutoff_start = (today.replace(day=1) - pd.DateOffset(years=2)).to_period('M').to_timestamp()
-
 df_melted = df_melted[df_melted['date'] >= cutoff_start]
 
-# Monthly aggregation
+# Aggregate monthly color counts
 monthly_color_usage = df_melted.groupby(['year', 'month', 'color']).size().reset_index(name='count')
 
 # Forecast section
-st.subheader("🎨 Color Trend Forecast (Past & Next 2 Years)")
+st.subheader("🎨 Color Forecast for Month {}".format(month))
 chart_df = pd.DataFrame()
 all_colors = monthly_color_usage['color'].unique()
 future_dates = pd.date_range(start=today.replace(day=1), periods=24, freq='MS')
@@ -78,12 +77,11 @@ for color in all_colors:
     model = XGBRegressor(n_estimators=100, objective='reg:squarederror')
     model.fit(X_train, y_train)
 
-    # Create future input
+    # Predict future months
     future_input = pd.DataFrame({
         'year': future_dates.year,
         'month': future_dates.month
     })
-
     preds = model.predict(future_input).clip(0)
     future_input['count'] = preds
     future_input['color'] = color
@@ -103,39 +101,41 @@ for color in all_colors:
     ])
     chart_df = pd.concat([chart_df, combined])
 
-# Color selection
-selected_colors = st.multiselect("Select Colors to View", list(all_colors), default=list(all_colors))
+# Filter chart data to selected month and year ± 2
+selected_years = [year - 2, year - 1, year]
+filtered_df = chart_df[
+    (chart_df['date'].dt.month == month) &
+    (chart_df['date'].dt.year.isin(selected_years))
+]
 
-if not selected_colors:
-    st.warning("Please select at least one color.")
+if filtered_df.empty:
+    st.warning("No data found for the selected month and years.")
 else:
-    chart_df = chart_df[chart_df['color'].isin(selected_colors)]
-
     # 📈 Line Chart
-    st.markdown("### 📉 Line Chart")
-    fig, ax = plt.subplots(figsize=(12, 6))
-    for color in selected_colors:
-        sub_actual = chart_df[(chart_df['color'] == color) & (chart_df['type'] == 'Actual')]
-        sub_forecast = chart_df[(chart_df['color'] == color) & (chart_df['type'] == 'Forecast')]
-        ax.plot(sub_actual['date'], sub_actual['count'], label=f"{color} - Actual", marker='o')
-        ax.plot(sub_forecast['date'], sub_forecast['count'], label=f"{color} - Forecast", linestyle='--')
-    ax.set_title("Monthly Gem Color Usage (Line Chart)")
+    st.markdown("### 📉 Line Chart for Month {}".format(month))
+    fig, ax = plt.subplots(figsize=(10, 5))
+    for color in filtered_df['color'].unique():
+        actual = filtered_df[(filtered_df['color'] == color) & (filtered_df['type'] == 'Actual')]
+        forecast = filtered_df[(filtered_df['color'] == color) & (filtered_df['type'] == 'Forecast')]
+        ax.plot(actual['date'], actual['count'], label=f"{color} - Actual", marker='o')
+        ax.plot(forecast['date'], forecast['count'], label=f"{color} - Forecast", linestyle='--')
+    ax.set_title(f"Gem Color Usage Trend - {month} over {selected_years}")
     ax.set_xlabel("Date")
-    ax.set_ylabel("Count")
+    ax.set_ylabel("Usage Count")
     ax.legend()
     plt.xticks(rotation=45)
     st.pyplot(fig)
 
     # 📊 Bar Chart
-    st.markdown("### 📊 Bar Chart")
-    bar_df = chart_df[chart_df['type'] == 'Forecast'].copy()
-    bar_df['month_year'] = bar_df['date'].dt.to_period("M").astype(str)
-    bar_pivot = bar_df.pivot_table(index='month_year', columns='color', values='count', fill_value=0)
+    st.markdown("### 📊 Bar Chart for Month {}".format(month))
+    bar_df = filtered_df.copy()
+    bar_df['year'] = bar_df['date'].dt.year
+    bar_pivot = bar_df.pivot_table(index='year', columns='color', values='count', fill_value=0)
 
-    fig2, ax2 = plt.subplots(figsize=(12, 6))
-    bar_pivot[selected_colors].plot(kind='bar', stacked=True, ax=ax2)
-    ax2.set_title("Forecasted Gem Color Usage (Bar Chart)")
-    ax2.set_xlabel("Month")
-    ax2.set_ylabel("Forecasted Count")
-    plt.xticks(rotation=45)
+    fig2, ax2 = plt.subplots(figsize=(10, 5))
+    bar_pivot.plot(kind='bar', ax=ax2)
+    ax2.set_title(f"Gem Color Forecast (Bar Chart) - Month {month}")
+    ax2.set_xlabel("Year")
+    ax2.set_ylabel("Usage Count")
+    ax2.legend(title="Color")
     st.pyplot(fig2)
