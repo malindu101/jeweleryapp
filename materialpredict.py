@@ -17,7 +17,7 @@ def load_data():
         database="SAPPHIRE",         # Same DB
         schema="PUBLIC"
     )
-    query = "SELECT * FROM user_behavior_1000_rows_final"
+    query = "SELECT * FROM USER_BEHAVIOR"
     df = pd.read_sql(query, conn)
     conn.close()
     return df
