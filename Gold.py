@@ -4,17 +4,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 from xgboost import XGBRegressor
 import snowflake.connector
+from datetime import datetime
 
-# 1. Load data from Snowflake
+# Load data from Snowflake
 @st.cache_data
 def load_data_from_snowflake():
     conn = snowflake.connector.connect(
-        user="MOW101",
-        password="Killme@20021128123123",
-        account="KWLEACZ-DX82931",
-        warehouse="COMPUTE_WH",
-        database="SAPPHIRE",         # Same DB
-        schema="PUBLIC"
+        user=st.secrets["user"],
+        password=st.secrets["password"],
+        account=st.secrets["account"],
+        warehouse=st.secrets["warehouse"],
+        database=st.secrets["database"],
+        schema=st.secrets["schema"]
     )
     query = "SELECT * FROM GOLD_PRICE"
     df = pd.read_sql(query, conn)
@@ -29,57 +30,58 @@ def load_data_from_snowflake():
     df['Year'] = df['DATE'].dt.year
     return df[['DATE', 'Year', 'Month', 'Gold_Price_LKR']]
 
-# 2. Train model
-def train_model(data):
-    X = data[['Year', 'Month']]
-    y = data['Gold_Price_LKR']
+# Train XGBoost model
+def train_model(df):
+    X = df[['Year', 'Month']]
+    y = df['Gold_Price_LKR']
     model = XGBRegressor(n_estimators=100, learning_rate=0.1)
     model.fit(X, y)
     return model
 
-# 3. Streamlit interface
-st.title("🪙 Gold Price Forecasting (via Snowflake + XGBoost)")
-st.markdown("Enter a future month and year to forecast the **gold price in LKR**.")
+# Forecast next 24 months
+def forecast_24_months(model, start_year):
+    months = []
+    years = []
 
-# Load and display data
+    for i in range(24):
+        month = (i % 12) + 1
+        year = start_year + (i // 12)
+        months.append(month)
+        years.append(year)
+
+    X_future = pd.DataFrame({'Year': years, 'Month': months})
+    predictions = model.predict(X_future)
+    forecast_df = pd.DataFrame({
+        'Year': years,
+        'Month': months,
+        'Predicted_Price_LKR': predictions
+    })
+    forecast_df['Date'] = pd.to_datetime(forecast_df[['Year', 'Month']].assign(DAY=1))
+    return forecast_df
+
+# Streamlit UI
+st.title("🪙 2-Year Monthly Gold Price Forecast (Snowflake + XGBoost)")
+st.markdown("This tool predicts monthly gold prices in **LKR** for 2 years ahead based on selected start year.")
+
 df = load_data_from_snowflake()
-
-st.subheader("📊 Summary Statistics")
-st.write(df.describe())
-
-# Line chart
-st.subheader("📈 Historical Gold Price Trend")
-fig, ax = plt.subplots()
-ax.plot(df['DATE'], df['Gold_Price_LKR'], color='gold', label='Gold Price')
-ax.set_xlabel("Date")
-ax.set_ylabel("LKR")
-ax.set_title("Gold Price Over Time")
-ax.legend()
-st.pyplot(fig)
-
-# Boxplot
-st.subheader("📦 Monthly Distribution")
-fig2, ax2 = plt.subplots()
-df.boxplot(column='Gold_Price_LKR', by='Month', ax=ax2)
-plt.suptitle("")
-ax2.set_title("Gold Price by Month")
-ax2.set_xlabel("Month")
-ax2.set_ylabel("LKR")
-st.pyplot(fig2)
-
-# Prediction form
-st.subheader("🔢 Prediction Input")
-col1, col2 = st.columns(2)
-with col1:
-    year = st.number_input("Select Year", min_value=2024, max_value=2030, value=2025)
-with col2:
-    month = st.selectbox("Select Month", list(range(1, 13)))
-
-# Train model and predict
 model = train_model(df)
-predicted_price = model.predict(np.array([[year, month]]))[0]
 
-# Display prediction
-st.subheader("🔮 Predicted Gold Price")
-st.success(f"Estimated price for {month}/{year}: **LKR {predicted_price:,.2f}**")
+# User input
+st.subheader("📅 Select Starting Year")
+available_years = list(range(datetime.now().year, datetime.now().year + 6))
+start_year = st.selectbox("Start Prediction From", available_years, index=1)
 
+if st.button("✅ Confirm and Predict"):
+    forecast_df = forecast_24_months(model, start_year)
+
+    st.subheader("📈 Forecasted Monthly Prices")
+    fig, ax = plt.subplots()
+    ax.plot(forecast_df['Date'], forecast_df['Predicted_Price_LKR'], marker='o', linestyle='-')
+    ax.set_title(f"Gold Price Forecast from {start_year} for 24 Months")
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Predicted Price (LKR)")
+    ax.grid(True)
+    st.pyplot(fig)
+
+    # Optional: show table
+    st.dataframe(forecast_df[['Date', 'Predicted_Price_LKR']].set_index('Date'))
