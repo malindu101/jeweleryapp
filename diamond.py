@@ -8,10 +8,10 @@ import snowflake.connector
 from datetime import datetime
 
 st.set_page_config(layout="wide")
-st.title("🪙 Gold Price Forecasting")
+st.title("🪙 Gold Live Price Forecasting")
 
-# Snowflake data fetch function
-def get_gold_data():
+# Connect to Snowflake
+def get_data_from_snowflake():
     conn = snowflake.connector.connect(
         user="MOW101",
         password="Killme@20021128123123",
@@ -20,58 +20,56 @@ def get_gold_data():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    df = pd.read_sql("SELECT * FROM GOLD_PRICE", conn)
+    query = "SELECT * FROM GOLD_PRICE"
+    df = pd.read_sql(query, conn)
     conn.close()
-
-    df.columns = df.columns.str.strip().str.lower()
+    df.columns = df.columns.str.lower()
     df['date'] = pd.to_datetime(df['date'])
     df.dropna(subset=['date', 'gold price /lkr'], inplace=True)
     df['price'] = df['gold price /lkr'].astype(float)
     return df
 
-# Sidebar inputs
+# Sidebar UI
 st.sidebar.header("🔧 Select Forecast Options")
 year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
-# Try loading data
+# Load data
 try:
-    df = get_gold_data()
+    df = get_data_from_snowflake()
 except Exception as e:
-    st.error(f"❌ Error loading data from Snowflake: {e}")
+    st.error(f"❌ Failed to fetch data: {e}")
     st.stop()
 
-# Forecast and plot after confirmation
+# Confirm Button logic
 if st.sidebar.button("Confirm Selection"):
 
-    def forecast_gold(data, target_year, target_month):
-        sub = data.copy()
-        sub = sub.sort_values("date")
-        latest_date = sub['date'].max()
+    def forecast_price(data, target_year, target_month):
+        data = data.sort_values("date")
+        latest_date = data['date'].max()
         one_year_ago = latest_date - pd.DateOffset(years=1)
-        sub = sub[sub['date'] >= one_year_ago]
-        sub['Year'] = sub['date'].dt.year
-        sub['Month'] = sub['date'].dt.month
-        X = sub[['Year', 'Month']]
-        y = sub['price']
+        recent = data[data['date'] >= one_year_ago]
+        recent['Year'] = recent['date'].dt.year
+        recent['Month'] = recent['date'].dt.month
+        X = recent[['Year', 'Month']]
+        y = recent['price']
         model = XGBRegressor(n_estimators=100)
         model.fit(X, y)
         input_df = pd.DataFrame([[target_year, target_month]], columns=['Year', 'Month'])
         prediction = model.predict(input_df)
-        return prediction[0], sub['date'], y, model
+        return prediction[0], recent['date'], y, model
 
-    # Perform forecast
-    predicted_price, hist_x, hist_y, model = forecast_gold(df, year, month)
-
+    # Perform prediction
+    predicted_price, hist_x, hist_y, trained_model = forecast_price(df, year, month)
     st.subheader(f"📊 Predicted Gold Price for {month}/{year}: **LKR {predicted_price:,.2f}**")
 
-    # Prepare future forecast (next 3 years)
+    # Future forecast range
     last_date = df['date'].max()
     future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=36, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
-    future_preds = model.predict(future_X)
+    future_preds = trained_model.predict(future_X)
 
-    # Plotting with smoothing
+    # Smooth plot function
     def smooth_plot(x, y, label, color, linestyle='-'):
         if len(x) < 4:
             plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -83,12 +81,12 @@ if st.sidebar.button("Confirm Selection"):
         x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
         plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
-    # Plot section
+    # Plot
     plt.style.use('seaborn-v0_8-whitegrid')
     fig = plt.figure(figsize=(12, 5))
     smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'goldenrod')
     smooth_plot(future_dates, future_preds, 'Forecast (Next 3 Years)', 'gold', linestyle='--')
-    plt.axvline(datetime(year, month, 1), color='darkorange', linestyle=':', label='Selected Forecast Month')
+    plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
     plt.title(f"Gold Price Trend Forecast")
     plt.xlabel("Month")
     plt.ylabel("Price (LKR)")
@@ -98,4 +96,4 @@ if st.sidebar.button("Confirm Selection"):
     st.pyplot(fig)
 
 else:
-    st.info("Please select forecast options and click 'Confirm Selection'.")
+    st.info("Please select a month and year, then click 'Confirm Selection' to view the forecast.")
