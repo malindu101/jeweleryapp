@@ -26,10 +26,16 @@ def get_data_from_snowflake():
     df['date'] = pd.to_datetime(df['date'])
     return df
 
-# Sidebar
+# Sidebar inputs
 st.sidebar.header("🔧 Filter Options")
 year = st.sidebar.selectbox("Select Year", list(range(2022, 2029)))
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
+confirm = st.sidebar.button("✅ Confirm Selection")
+
+# Wait for confirmation
+if not confirm:
+    st.info("Please select a year and month, then click 'Confirm Selection'.")
+    st.stop()
 
 # Fetch data
 try:
@@ -42,7 +48,7 @@ except Exception as e:
 df['year'] = df['date'].dt.year
 df['month'] = df['date'].dt.month
 
-# Melt top color columns
+# Melt top colors into one column
 df_melted = pd.melt(
     df,
     id_vars=['date', 'year', 'month'],
@@ -57,7 +63,7 @@ today = datetime.now()
 cutoff_start = (today.replace(day=1) - pd.DateOffset(years=2)).to_period('M').to_timestamp()
 df_melted = df_melted[df_melted['date'] >= cutoff_start]
 
-# Aggregate monthly color counts
+# Aggregate monthly color usage
 monthly_color_usage = df_melted.groupby(['year', 'month', 'color']).size().reset_index(name='count')
 
 # Forecast section
@@ -77,7 +83,7 @@ for color in all_colors:
     model = XGBRegressor(n_estimators=100, objective='reg:squarederror')
     model.fit(X_train, y_train)
 
-    # Predict future months
+    # Predict future
     future_input = pd.DataFrame({
         'year': future_dates.year,
         'month': future_dates.month
@@ -101,7 +107,7 @@ for color in all_colors:
     ])
     chart_df = pd.concat([chart_df, combined])
 
-# Filter chart data to selected month and year ± 2
+# Filter for selected month and last 3 years
 selected_years = [year - 2, year - 1, year]
 filtered_df = chart_df[
     (chart_df['date'].dt.month == month) &
@@ -119,7 +125,7 @@ else:
         forecast = filtered_df[(filtered_df['color'] == color) & (filtered_df['type'] == 'Forecast')]
         ax.plot(actual['date'], actual['count'], label=f"{color} - Actual", marker='o')
         ax.plot(forecast['date'], forecast['count'], label=f"{color} - Forecast", linestyle='--')
-    ax.set_title(f"Gem Color Usage Trend - {month} over {selected_years}")
+    ax.set_title(f"Gem Color Usage Trend - Month {month}")
     ax.set_xlabel("Date")
     ax.set_ylabel("Usage Count")
     ax.legend()
