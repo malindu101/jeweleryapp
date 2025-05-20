@@ -9,7 +9,6 @@ import snowflake.connector
 @st.cache_data
 def load_data_from_snowflake():
     conn = snowflake.connector.connect(
-        conn = snowflake.connector.connect(
         user="MOW101",
         password="Killme@20021128123123",
         account="KWLEACZ-DX82931",
