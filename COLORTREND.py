@@ -69,7 +69,7 @@ def train_and_predict():
 if confirm:
     predicted_df = train_and_predict()
 
-    # Line Chart: Full year trend
+    # Line Chart: Full year trend with vertical line for selected month
     st.subheader(f"📈 XGBoost Predicted Trends for All Gems in {selected_year}")
     monthly_data = predicted_df[predicted_df['year'] == selected_year]
 
@@ -82,6 +82,9 @@ if confirm:
             xnew = np.linspace(months.min(), months.max(), 300)
             y_smooth = spline(xnew)
             ax2.plot(xnew, y_smooth, label=gem)
+
+        # Vertical line for selected month
+        ax2.axvline(x=selected_month, color='black', linestyle='--', linewidth=1.5, label=f'Selected Month ({selected_month})')
 
         ax2.set_xlabel("Month")
         ax2.set_ylabel("Predicted Usage Count")
