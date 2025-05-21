@@ -13,11 +13,11 @@ st.title("💎 Gem Color Usage Forecasting (2026–2028)")
 @st.cache_data
 def load_data_from_snowflake():
     conn = snowflake.connector.connect(
-         user="MOW101",
+        user="MOW101",
         password="Killme@20021128123123",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
-        database="SAPPHIRE",
+        database="SAPPHIRE",         # Same DB
         schema="PUBLIC"
     )
     query = "SELECT * FROM COLORTREND"
@@ -39,11 +39,11 @@ def load_data_from_snowflake():
 
 monthly_usage, valid_colors = load_data_from_snowflake()
 
-# Sidebar input for year and month (2026–2028 only)
+# Sidebar selection
 selected_year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 selected_month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
-# Forecasting model
+# Model training and forecasting
 @st.cache_data
 def train_and_predict():
     X = monthly_usage[['year', 'month']]
@@ -64,20 +64,44 @@ def train_and_predict():
 
 predicted_df = train_and_predict()
 
-# Filter prediction for selected year and month
+# Section: Bar chart for selected month
+st.subheader(f"📊 Predicted Gem Usage for {selected_month}/{selected_year}")
 selected_row = predicted_df[(predicted_df['year'] == selected_year) & (predicted_df['month'] == selected_month)]
 
-# Show bar chart
-st.subheader(f"📊 Predicted Gem Usage for {selected_month}/{selected_year}")
 if not selected_row.empty:
     usage = selected_row[valid_colors].values.flatten()
     fig, ax = plt.subplots(figsize=(8, 5))
     bars = ax.bar(valid_colors, usage, color=['red', 'blue', 'green', 'purple'])
     ax.set_ylabel("Predicted Usage Count")
-    ax.set_title(f"Predicted Gem Usage - {selected_month}/{selected_year}")
+    ax.set_title(f"Gem Usage Forecast - {selected_month}/{selected_year}")
     ax.grid(axis='y')
     for bar in bars:
         ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, int(bar.get_height()), ha='center', va='bottom')
     st.pyplot(fig)
 else:
     st.warning("No prediction available for selected month and year.")
+
+# Section: Line chart for full year predictions
+st.subheader(f"📈 XGBoost Predicted Trends for All Gems in {selected_year}")
+monthly_data = predicted_df[predicted_df['year'] == selected_year]
+
+if not monthly_data.empty:
+    months = monthly_data['month'].values
+    fig2, ax2 = plt.subplots(figsize=(10, 6))
+
+    for gem in valid_colors:
+        y = monthly_data[gem].values
+        spline = make_interp_spline(months, y, k=3)
+        xnew = np.linspace(months.min(), months.max(), 300)
+        y_smooth = spline(xnew)
+        ax2.plot(xnew, y_smooth, label=gem)
+
+    ax2.set_xlabel("Month")
+    ax2.set_ylabel("Predicted Usage Count")
+    ax2.set_title(f"Predicted Monthly Trends for {selected_year}")
+    ax2.set_xticks(months)
+    ax2.legend()
+    ax2.grid(True)
+    st.pyplot(fig2)
+else:
+    st.warning("No yearly prediction available.")
