@@ -22,15 +22,18 @@ def get_data_from_snowflake():
     query = "SELECT GEM_COLOR, CREATED_AT FROM STOCK"
     df = pd.read_sql(query, conn)
     conn.close()
-    df['CREATED_AT'] = pd.to_datetime(df['CREATED_AT'], errors='coerce')
+    
+    # Convert all column names to lowercase for consistency
+    df.columns = df.columns.str.lower()
+    df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
     return df
 
 # Load data
 df = get_data_from_snowflake()
 
 # --- Preprocess data ---
-df['year_month'] = df['CREATED_AT'].dt.to_period('M')
-monthly_counts = df.groupby(['year_month', 'GEM_COLOR']).size().unstack(fill_value=0)
+df['year_month'] = df['created_at'].dt.to_period('M')
+monthly_counts = df.groupby(['year_month', 'gem_color']).size().unstack(fill_value=0)
 monthly_counts.index = monthly_counts.index.to_timestamp()
 monthly_counts = monthly_counts.asfreq('MS')
 
