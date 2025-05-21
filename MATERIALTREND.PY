@@ -4,21 +4,36 @@ import numpy as np
 import xgboost as xgb
 import matplotlib.pyplot as plt
 from scipy.interpolate import make_interp_spline
+import snowflake.connector
 
 st.set_page_config(layout="wide")
 st.title("🔧 Material Usage Forecasting (2026–2028)")
 
-# Load from uploaded CSV
+# Load data from Snowflake
 @st.cache_data
 def load_material_data():
-    df = pd.read_csv("materialtrend.csv")
+    conn = snowflake.connector.connect(
+        user="MOW101",
+        password="Killme@20021128123123",
+        account="KWLEACZ-DX82931",
+        warehouse="COMPUTE_WH",
+        database="SAPPHIRE",         # Same DB
+        schema="PUBLIC"
+    )
+    query = "SELECT * FROM MATERIALTREND"
+    df = pd.read_sql(query, conn)
+    conn.close()
+
     df.columns = df.columns.str.lower()
     df['timestamp'] = pd.to_datetime(df['timestamp'], errors='coerce')
     df.dropna(subset=['timestamp'], inplace=True)
     df['year'] = df['timestamp'].dt.year
     df['month'] = df['timestamp'].dt.month
 
-    valid_materials = ['Gold', 'Silver', 'Platinum', 'Rose Gold']  # Adjust based on your dataset
+    # Define known materials (customize if needed)
+    valid_materials = ['Gold', 'Silver', 'Platinum', 'Rose Gold']
+
+    # Count how many times each material appears in the 3 top fields
     for material in valid_materials:
         df[material] = df[['top_material_1', 'top_material_2', 'top_material_3']].apply(lambda x: sum(x == material), axis=1)
 
@@ -27,17 +42,17 @@ def load_material_data():
 
 monthly_usage, valid_materials = load_material_data()
 
-# Sidebar for input
+# Sidebar inputs
 selected_year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 selected_month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 confirm = st.sidebar.button("✅ Confirm Selection")
 
-# Forecasting with XGBoost
+# Model Training and Prediction
 @st.cache_data
 def train_and_predict():
     X = monthly_usage[['year', 'month']]
     future = pd.concat(
-        [pd.DataFrame({'year': [yr] * 12, 'month': list(range(1, 13))}) for yr in [2026, 2027, 2028]],
+        [pd.DataFrame({'year': [yr]*12, 'month': list(range(1, 13))}) for yr in [2026, 2027, 2028]],
         ignore_index=True
     )
 
@@ -54,10 +69,11 @@ def train_and_predict():
 
     return predicted_df
 
+# Show predictions only on confirm
 if confirm:
     predicted_df = train_and_predict()
 
-    # Line Chart for full year
+    # Line Chart
     st.subheader(f"📈 XGBoost Predicted Trends for All Materials in {selected_year}")
     monthly_data = predicted_df[predicted_df['year'] == selected_year]
 
@@ -83,7 +99,7 @@ if confirm:
     else:
         st.warning("No prediction data available for this year.")
 
-    # Bar Chart for selected month
+    # Bar Chart
     st.subheader(f"📊 Predicted Material Usage for {selected_month}/{selected_year}")
     selected_row = predicted_df[(predicted_df['year'] == selected_year) & (predicted_df['month'] == selected_month)]
 
