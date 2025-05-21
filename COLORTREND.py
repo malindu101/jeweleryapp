@@ -39,11 +39,11 @@ def load_data_from_snowflake():
 
 monthly_usage, valid_colors = load_data_from_snowflake()
 
-# Sidebar selections
+# Sidebar input for year and month (2026–2028 only)
 selected_year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 selected_month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
-# Train model and forecast
+# Forecasting model
 @st.cache_data
 def train_and_predict():
     X = monthly_usage[['year', 'month']]
@@ -64,9 +64,10 @@ def train_and_predict():
 
 predicted_df = train_and_predict()
 
-# Filter selected month-year data
+# Filter prediction for selected year and month
 selected_row = predicted_df[(predicted_df['year'] == selected_year) & (predicted_df['month'] == selected_month)]
 
+# Show bar chart
 st.subheader(f"📊 Predicted Gem Usage for {selected_month}/{selected_year}")
 if not selected_row.empty:
     usage = selected_row[valid_colors].values.flatten()
@@ -80,27 +81,3 @@ if not selected_row.empty:
     st.pyplot(fig)
 else:
     st.warning("No prediction available for selected month and year.")
-
-# Display full year data
-st.subheader(f"📅 Monthly Forecast for {selected_year}")
-yearly_data = predicted_df[predicted_df['year'] == selected_year].reset_index(drop=True)
-st.dataframe(yearly_data)
-
-# Optional: Smoothed line chart for 2026
-st.subheader("📈 Smoothed Forecast for 2026")
-months = np.array(range(1, 13))
-fig, ax = plt.subplots(figsize=(10, 6))
-for gem in valid_colors:
-    y = predicted_df[predicted_df['year'] == 2026][gem].values
-    spline = make_interp_spline(months, y, k=3)
-    xnew = np.linspace(months.min(), months.max(), 300)
-    y_smooth = spline(xnew)
-    ax.plot(xnew, y_smooth, label=gem)
-
-ax.set_title("Smoothed Gem Usage Forecast (2026)")
-ax.set_xlabel("Month")
-ax.set_ylabel("Usage Count")
-ax.set_xticks(months)
-ax.legend()
-ax.grid(True)
-st.pyplot(fig)
