@@ -4,24 +4,17 @@ from xgboost import XGBRegressor
 from sklearn.multioutput import MultiOutputRegressor
 import snowflake.connector
 
-# --- Snowflake connection parameters ---
+# Load data from Snowflake
+@st.cache_data
+def load_material_data():
+    conn = snowflake.connector.connect(
         user="MOW101",
         password="Killme@20021128123123",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
         database="SAPPHIRE",         # Same DB
         schema="PUBLIC"
-
-# --- Connect to Snowflake ---
-conn = snowflake.connector.connect(
-    user=user,
-    password=password,
-    account=account,
-    warehouse=warehouse,
-    database=database,
-    schema=schema
-)
-
+    )
 # --- Query your Snowflake table ---
 query = "SELECT GEM_COLOR, CREATED_AT FROM STOCK"
 df = pd.read_sql(query, conn)
