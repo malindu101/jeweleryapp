@@ -1,16 +1,15 @@
-import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import streamlit as st
+from xgboost import XGBRegressor
+from sklearn.multioutput import MultiOutputRegressor
 import snowflake.connector
-from xgboost import XGBClassifier
-from sklearn.preprocessing import LabelEncoder
-from sklearn.model_selection import train_test_split
-import numpy as np
+from datetime import datetime
 
-# Streamlit page setup
-st.set_page_config(page_title="Gem Color Predictor", layout="centered")
-st.title("💎 Gem Color Prediction App")
+st.set_page_config(layout="wide")
+st.title("🔮 Gemstone Usage Forecasting")
 
-# Function to load data from Snowflake
+# --- Connect to Snowflake ---
 @st.cache_data
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
@@ -18,64 +17,55 @@ def get_data_from_snowflake():
         password="Killme@20021128123123",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
-        database="SAPPHIRE",         # Same DB
+        database="SAPPHIRE",
         schema="PUBLIC"
     )
-    df = pd.read_sql("SELECT * FROM STOCK", conn)
+    query = "SELECT * FROM STOCK"
+    df = pd.read_sql(query, conn)
     conn.close()
+    df.columns = df.columns.str.lower()
+    df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
     return df
 
-# Function to train the model
-@st.cache_resource
-def train_model():
-    df = get_data_from_snowflake()
-    df['created_at'] = pd.to_datetime(df['created_at'], errors='coerce')
-    df.dropna(subset=['created_at', 'gem_color'], inplace=True)
-    df['year'] = df['created_at'].dt.year
-    df['month'] = df['created_at'].dt.month
-    df['hour'] = df['created_at'].dt.hour
-    df['weekday'] = df['created_at'].dt.weekday
+df = get_data_from_snowflake()
 
-    # Encode categorical variables
-    material_le = LabelEncoder()
-    color_le = LabelEncoder()
-    df['material_encoded'] = material_le.fit_transform(df['material'].astype(str))
-    df['gem_color_encoded'] = color_le.fit_transform(df['gem_color'])
+# --- Preprocess data ---
+df['year_month'] = df['created_at'].dt.to_period('M')
+monthly_counts = df.groupby(['year_month', 'gem_color']).size().unstack(fill_value=0)
+monthly_counts.index = monthly_counts.index.to_timestamp()
+monthly_counts = monthly_counts.asfreq('MS')
+train_data = monthly_counts[monthly_counts.index.year <= 2025]
+train_data['month'] = train_data.index.month
+train_data['year'] = train_data.index.year
 
-    X = df[['year', 'month', 'hour', 'weekday', 'material_encoded']]
-    y = df['gem_color_encoded']
+X = train_data[['year', 'month']]
+y = train_data.drop(columns=['year', 'month'])
 
-    model = XGBClassifier(n_estimators=30, max_depth=3, learning_rate=0.2,
-                          use_label_encoder=False, eval_metric='mlogloss')
-    model.fit(X, y)
+# --- Model Training ---
+model = MultiOutputRegressor(XGBRegressor(n_estimators=100, learning_rate=0.1, random_state=42))
+model.fit(X, y)
 
-    return model, material_le, color_le
+# --- User Selection ---
+st.sidebar.header("📅 Forecast Parameters")
+selected_year = st.sidebar.selectbox("Select Year to Predict", list(range(2026, 2029)))
+months = st.sidebar.multiselect("Select Months", list(range(1, 13)), default=list(range(1, 13)))
 
-# Load trained model and encoders
-model, material_le, color_le = train_model()
+if months:
+    # --- Predict for Selected Year and Months ---
+    future_dates = pd.date_range(start=f"{selected_year}-01-01", end=f"{selected_year}-12-01", freq='MS')
+    future_dates = future_dates[future_dates.month.isin(months)]
+    future_df = pd.DataFrame({
+        'year': future_dates.year,
+        'month': future_dates.month
+    })
 
-# Form for user input
-with st.form("predict_form"):
-    st.subheader("📅 Enter Order Details to Predict Gem Color")
+    predictions = model.predict(future_df)
+    prediction_df = pd.DataFrame(predictions, index=future_dates, columns=y.columns)
 
-    date_input = st.date_input("Order Date")
-    time_input = st.time_input("Order Time")
-    material_input = st.selectbox("Material", material_le.classes_)
+    # --- Plot ---
+    st.subheader(f"📊 Predicted Gemstone Usage for {selected_year}")
+    st.line_chart(prediction_df)
 
-    submitted = st.form_submit_button("Predict Gem Color")
-
-# Prediction
-if submitted:
-    year = date_input.year
-    month = date_input.month
-    weekday = date_input.weekday()
-    hour = time_input.hour
-    material_encoded = material_le.transform([material_input])[0]
-
-    input_data = pd.DataFrame([[year, month, hour, weekday, material_encoded]],
-                              columns=['year', 'month', 'hour', 'weekday', 'material_encoded'])
-
-    prediction = model.predict(input_data)[0]
-    predicted_color = color_le.inverse_transform([prediction])[0]
-
-    st.success(f"🎯 Predicted Gem Color: **{predicted_color}**")
+    st.dataframe(prediction_df.style.format(precision=0))
+else:
+    st.warning("Please select at least one month to see predictions.")
