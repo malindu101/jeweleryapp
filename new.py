@@ -7,7 +7,7 @@ from scipy.interpolate import make_interp_spline
 import snowflake.connector
 
 st.set_page_config(layout="wide")
-st.title("🔧 Material Usage Forecasting (2026–2028)")
+st.title("🔧 Material Usage Forecasting")
 
 # Load data from Snowflake
 @st.cache_data
@@ -30,7 +30,7 @@ def load_material_data():
     df['year'] = df['timestamp'].dt.year
     df['month'] = df['timestamp'].dt.month
 
-    # Removed Platinum
+    # Materials to predict (no Platinum)
     valid_materials = ['Gold', 'Silver', 'Rose Gold']
 
     for material in valid_materials:
@@ -41,12 +41,12 @@ def load_material_data():
 
 monthly_usage, valid_materials = load_material_data()
 
-# Sidebar inputs
+# Sidebar input
 selected_year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
 selected_month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 confirm = st.sidebar.button("✅ Confirm Selection")
 
-# Model Training and Prediction
+# Train XGBoost and predict
 @st.cache_data
 def train_and_predict():
     X = monthly_usage[['year', 'month']]
@@ -60,20 +60,19 @@ def train_and_predict():
         y = monthly_usage[material]
         model = xgb.XGBRegressor(n_estimators=20, max_depth=3, learning_rate=0.1, verbosity=0)
         model.fit(X, y)
-        predictions[material] = np.round(model.predict(future))
+        predictions[material] = np.round(model.predict(future)).astype(int)  # Force integer predictions
 
     predicted_df = future.copy()
     for material in valid_materials:
-        predicted_df[material] = predictions[material].astype(int)
+        predicted_df[material] = predictions[material]  # Already int
 
     return predicted_df
 
-# Show predictions only on confirm
 if confirm:
     predicted_df = train_and_predict()
 
     # Line Chart
-    st.subheader(f"📈 Predicted Trends for All Materials in {selected_year}")
+    st.subheader(f"📈 XGBoost Predicted Trends for All Materials in {selected_year}")
     monthly_data = predicted_df[predicted_df['year'] == selected_year]
 
     if not monthly_data.empty:
@@ -110,7 +109,8 @@ if confirm:
         ax.set_title(f"Material Usage Forecast - {selected_month}/{selected_year}")
         ax.grid(axis='y')
         for bar in bars:
-            ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 1, int(bar.get_height()), ha='center', va='bottom')
+            height = int(bar.get_height())
+            ax.text(bar.get_x() + bar.get_width()/2, height + 1, height, ha='center', va='bottom')
         st.pyplot(fig)
     else:
         st.warning("No prediction available for selected month and year.")
