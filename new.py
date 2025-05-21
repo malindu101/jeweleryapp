@@ -30,10 +30,9 @@ def load_material_data():
     df['year'] = df['timestamp'].dt.year
     df['month'] = df['timestamp'].dt.month
 
-    # Define known materials (customize if needed)
-    valid_materials = ['Gold', 'Silver', 'Platinum', 'Rose Gold']
+    # Removed Platinum
+    valid_materials = ['Gold', 'Silver', 'Rose Gold']
 
-    # Count how many times each material appears in the 3 top fields
     for material in valid_materials:
         df[material] = df[['top_material_1', 'top_material_2', 'top_material_3']].apply(lambda x: sum(x == material), axis=1)
 
@@ -61,7 +60,7 @@ def train_and_predict():
         y = monthly_usage[material]
         model = xgb.XGBRegressor(n_estimators=20, max_depth=3, learning_rate=0.1, verbosity=0)
         model.fit(X, y)
-        predictions[material] = np.round(model.predict(future))  # Round predictions
+        predictions[material] = np.round(model.predict(future))
 
     predicted_df = future.copy()
     for material in valid_materials:
@@ -74,7 +73,7 @@ if confirm:
     predicted_df = train_and_predict()
 
     # Line Chart
-    st.subheader(f"📈 XGBoost Predicted Trends for All Materials in {selected_year}")
+    st.subheader(f"📈 Predicted Trends for All Materials in {selected_year}")
     monthly_data = predicted_df[predicted_df['year'] == selected_year]
 
     if not monthly_data.empty:
@@ -106,7 +105,7 @@ if confirm:
     if not selected_row.empty:
         usage = selected_row[valid_materials].values.flatten()
         fig, ax = plt.subplots(figsize=(8, 5))
-        bars = ax.bar(valid_materials, usage, color=['gold', 'silver', 'gray', 'pink'])
+        bars = ax.bar(valid_materials, usage, color=['gold', 'silver', 'pink'])
         ax.set_ylabel("Predicted Usage Count")
         ax.set_title(f"Material Usage Forecast - {selected_month}/{selected_year}")
         ax.grid(axis='y')
