@@ -7,7 +7,7 @@ from scipy.interpolate import make_interp_spline
 import snowflake.connector
 
 st.set_page_config(layout="wide")
-st.title("💎 Gem Color Usage Forecasting (2026–2028)")
+st.title("💎 Gem Color Usage Forecasting")
 
 # Load data from Snowflake
 @st.cache_data
@@ -70,7 +70,7 @@ if confirm:
     predicted_df = train_and_predict()
 
     # Line Chart for Full Year with vertical line
-    st.subheader(f"📈 XGBoost Predicted Trends for All Gems in {selected_year}")
+    st.subheader(f"📈 Predicted Trends for All Gems in {selected_year}")
     monthly_data = predicted_df[predicted_df['year'] == selected_year]
 
     if not monthly_data.empty:
