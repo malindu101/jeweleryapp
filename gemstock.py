@@ -20,7 +20,7 @@ def get_data_from_snowflake():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    query = "SELECT * FROM GOLD_PRICE"
+    query = "SELECT * FROM STOCK"
     df = pd.read_sql(query, conn)
     conn.close()
 
