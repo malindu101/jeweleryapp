@@ -18,10 +18,10 @@ st.title("💎 Predicted Gemstone Usage in 2026")
 def load_data():
     conn = snowflake.connector.connect(
         user="MOW101",
-        password="Killme@20021128123123",
+        password="YOUR_PASSWORD",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
-        database="SAPPHIRE",         # Same DB
+        database="SAPPHIRE",
         schema="PUBLIC"
     )
     query = "SELECT * FROM SEQUENTIAL_CUSTOM_ORDERS"
@@ -106,6 +106,8 @@ ax2.legend()
 ax2.grid(True, axis='y', linestyle='--', alpha=0.7)
 st.pyplot(fig2)
 
-# Optional: download predicted data
+# -------------------------------
+# CSV Download Button
+# -------------------------------
 csv = prediction_df.reset_index().to_csv(index=False).encode('utf-8')
 st.download_button("📥 Download Prediction Data as CSV", csv, "predicted_gemstone_usage_2026.csv", "text/csv")
