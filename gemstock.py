@@ -10,7 +10,7 @@ from datetime import datetime
 st.set_page_config(layout="wide")
 st.title("🪙 Gold Live Price Forecasting")
 
-# ✅ Fetch gold price data from Snowflake
+# Connect to Snowflake and retrieve gold price data
 def get_data_from_snowflake():
     conn = snowflake.connector.connect(
         user="MOW101",
@@ -20,36 +20,40 @@ def get_data_from_snowflake():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    query = "SELECT * FROM STOCK"
+    query = "SELECT * FROM GOLD_PRICE"
     df = pd.read_sql(query, conn)
     conn.close()
 
-    # ✅ Rename and preprocess
+    # Rename columns to standardized names
     df.rename(columns={
         'DATE': 'timestamp',
         'Gold Price /LKR': 'price'
     }, inplace=True)
+
+    # Convert data types
     df['timestamp'] = pd.to_datetime(df['timestamp'])
     df['price'] = df['price'].astype(float)
+
     return df
 
-# ✅ Sidebar options
+# Sidebar input for forecast target
 st.sidebar.header("🔧 Select Forecast Options")
 year = st.sidebar.selectbox("Select Year", list(range(datetime.now().year, 2029)))
 month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
 
-# ✅ Load data
+# Load and process the data
 try:
     df = get_data_from_snowflake()
 except Exception as e:
     st.error(f"❌ Failed to fetch data: {e}")
     st.stop()
 
-# ✅ Forecast logic
+# Forecasting logic
 if st.sidebar.button("Confirm Selection"):
     def forecast_price(data, target_year, target_month):
         sub = data.sort_values("timestamp")
-        one_year_ago = sub['timestamp'].max() - pd.DateOffset(years=1)
+        latest_date = sub['timestamp'].max()
+        one_year_ago = latest_date - pd.DateOffset(years=1)
         sub = sub[sub['timestamp'] >= one_year_ago]
 
         sub['Year'] = sub['timestamp'].dt.year
@@ -64,17 +68,17 @@ if st.sidebar.button("Confirm Selection"):
         prediction = model.predict(input_df)
         return prediction[0], sub['timestamp'], y, model
 
-    # ✅ Run prediction
+    # Run forecast
     predicted_price, hist_x, hist_y, trained_model = forecast_price(df, year, month)
-    st.subheader(f"📊 Predicted Gold Price for {month}/{year}: **LKR {predicted_price:,.2f}**")
+    st.subheader(f"📊 Predicted Price in {month}/{year}: **LKR {predicted_price:,.2f}**")
 
-    # ✅ Forecast future prices
+    # Generate future predictions for the chart
     last_date = df['timestamp'].max()
     future_dates = pd.date_range(start=last_date + pd.DateOffset(months=1), periods=36, freq='MS')
     future_X = pd.DataFrame({'Year': future_dates.year, 'Month': future_dates.month})
     future_preds = trained_model.predict(future_X)
 
-    # ✅ Smoothed plotting function
+    # Smooth line plot function
     def smooth_plot(x, y, label, color, linestyle='-'):
         if len(x) < 4:
             plt.plot(x, y, label=label, color=color, linestyle=linestyle)
@@ -86,15 +90,15 @@ if st.sidebar.button("Confirm Selection"):
         x_smooth_dt = pd.to_datetime(x_smooth * 86400, unit='s', origin='unix')
         plt.plot(x_smooth_dt, y_smooth, label=label, color=color, linestyle=linestyle)
 
-    # ✅ Plot results
+    # Plot the forecast
     plt.style.use('seaborn-v0_8-whitegrid')
     fig = plt.figure(figsize=(12, 5))
     smooth_plot(hist_x, hist_y, 'Historical (1 Year)', 'goldenrod')
     smooth_plot(future_dates, future_preds, 'Forecast (Next 3 Years)', 'goldenrod', linestyle='--')
     plt.axvline(datetime(year, month, 1), color='red', linestyle=':', label='Selected Forecast Month')
-    plt.title("📈 Gold Price Trend in LKR")
+    plt.title(f"📈 Gold Price Trend (LKR)")
     plt.xlabel("Month")
-    plt.ylabel("Price (LKR)")
+    plt.ylabel("Price in LKR")
     plt.xticks(rotation=45)
     plt.tight_layout(rect=[0, 0.1, 1, 1])
     plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=1, frameon=False)
