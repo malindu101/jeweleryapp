@@ -21,7 +21,7 @@ def get_gem_data():
         database="SAPPHIRE",
         schema="PUBLIC"
     )
-    query = "SELECT * FROM GEM_USAGE"
+    query = "SELECT * FROM STOCK"
     df = pd.read_sql(query, conn)
     conn.close()
     df.columns = df.columns.str.lower()
