@@ -8,9 +8,9 @@ from scipy.interpolate import make_interp_spline
 import snowflake.connector
 
 st.set_page_config(layout="wide")
-st.title("🔮 Gemstone Usage Forecast (2026–2028)")
+st.title("🔮 Gemstone Usage Forecast (2025 vs Selected Year)")
 
-# ✅ Snowflake Data Loader
+# ✅ Fetch data from Snowflake
 @st.cache_data
 def get_gem_data():
     conn = snowflake.connector.connect(
@@ -41,6 +41,10 @@ monthly_counts = df.groupby(['year_month', 'gem_color']).size().unstack(fill_val
 monthly_counts.index = monthly_counts.index.to_timestamp()
 monthly_counts = monthly_counts.asfreq('MS')
 
+# ✅ Extract 2025 actual data
+actual_2025 = monthly_counts[monthly_counts.index.year == 2025].copy()
+
+# ✅ Train on data up to 2025
 train_data = monthly_counts[monthly_counts.index.year <= 2025].copy()
 train_data['month'] = train_data.index.month
 train_data['year'] = train_data.index.year
@@ -52,10 +56,10 @@ y = train_data.drop(columns=['year', 'month'], errors='ignore')
 model = MultiOutputRegressor(XGBRegressor(n_estimators=100, learning_rate=0.1, random_state=42))
 model.fit(X, y)
 
-# ✅ User Selection: Year and Month
-st.sidebar.header("🔧 Select Month to View Details")
-selected_year = st.sidebar.selectbox("Select Year", [2026, 2027, 2028])
-selected_month = st.sidebar.selectbox("Select Month", list(range(1, 13)))
+# ✅ User selects year/month
+st.sidebar.header("🔧 Select Forecast Period")
+selected_year = st.sidebar.selectbox("Select Forecast Year", [2026, 2027, 2028])
+selected_month = st.sidebar.selectbox("Select Forecast Month", list(range(1, 13)))
 
 # ✅ Forecast for 2026–2028
 future_dates = pd.date_range(start="2026-01-01", end="2028-12-01", freq='MS')
@@ -63,35 +67,45 @@ future_df = pd.DataFrame({'year': future_dates.year, 'month': future_dates.month
 predictions = model.predict(future_df)
 prediction_df = pd.DataFrame(predictions, index=future_dates, columns=y.columns)
 
+# ✅ Extract selected year from prediction
+predicted_selected_year = prediction_df[prediction_df.index.year == selected_year]
+
 # -------------------------------
 # 🔷 1. Smoothed Line Chart
 # -------------------------------
-st.subheader("📈 Smoothed Line Chart - Full Forecast (2026–2028)")
+st.subheader("📈 Smoothed Line Chart - Actual 2025 vs Predicted " + str(selected_year))
 plt.figure(figsize=(12, 6))
-x_vals = np.arange(len(prediction_df.index))
+x_2025 = np.arange(len(actual_2025))
+x_sel = np.arange(len(predicted_selected_year))
 
-for column in prediction_df.columns:
-    y_vals = prediction_df[column].values
-    x_smooth = np.linspace(x_vals.min(), x_vals.max(), 300)
-    y_smooth = make_interp_spline(x_vals, y_vals, k=3)(x_smooth)
-    plt.plot(x_smooth, y_smooth, label=column)
+for column in y.columns:
+    # Actual 2025
+    y_2025_vals = actual_2025[column].values
+    x_2025_smooth = np.linspace(x_2025.min(), x_2025.max(), 300)
+    y_2025_smooth = make_interp_spline(x_2025, y_2025_vals, k=3)(x_2025_smooth)
+    plt.plot(x_2025_smooth, y_2025_smooth, label=f"{column} (2025)", linestyle="-")
 
-plt.xticks(x_vals[::3], prediction_df.index.strftime('%b %Y')[::3], rotation=45)
-plt.title("Predicted Monthly Gem Usage (2026–2028)")
+    # Forecast selected year
+    y_sel_vals = predicted_selected_year[column].values
+    x_sel_smooth = np.linspace(x_sel.min(), x_sel.max(), 300)
+    y_sel_smooth = make_interp_spline(x_sel, y_sel_vals, k=3)(x_sel_smooth)
+    plt.plot(x_sel_smooth, y_sel_smooth, label=f"{column} ({selected_year})", linestyle="--")
+
+plt.xticks(x_2025, actual_2025.index.strftime('%b'), rotation=45)
+plt.title(f"Predicted Monthly Gem Usage: 2025 (Actual) vs {selected_year} (Forecast)")
 plt.xlabel("Month")
-plt.ylabel("Predicted Gem Count")
-plt.legend()
+plt.ylabel("Gem Count")
 plt.grid(True)
-plt.tight_layout()
+plt.legend(loc='upper center', bbox_to_anchor=(0.5, -0.25), ncol=2, frameon=False)
+plt.tight_layout(rect=[0, 0.15, 1, 1])
 st.pyplot(plt)
 
 # -------------------------------
 # 🔷 2. Bar Chart for Selected Month
 # -------------------------------
 st.subheader(f"📊 Grouped Bar Chart - {selected_month:02}/{selected_year} Gemstone Usage Forecast")
-
-# Filter selected year/month
 selected_date = pd.to_datetime(f"{selected_year}-{selected_month:02}-01")
+
 if selected_date in prediction_df.index:
     month_data = prediction_df.loc[selected_date]
     fig, ax = plt.subplots(figsize=(10, 5))
@@ -103,4 +117,4 @@ if selected_date in prediction_df.index:
     plt.tight_layout()
     st.pyplot(fig)
 else:
-    st.warning("Selected date not available in prediction data.")
+    st.warning("Selected date not found in forecast.")
