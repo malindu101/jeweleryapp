@@ -8,7 +8,7 @@ from scipy.interpolate import make_interp_spline
 import snowflake.connector
 
 st.set_page_config(layout="wide")
-st.title("🔮 Gemstone Usage Forecast (Past Year vs Selected Year)")
+st.title("🔮 Gemstone Usage Forecast")
 
 # ✅ Fetch data from Snowflake
 @st.cache_data
@@ -73,7 +73,7 @@ if confirm:
     # -------------------------------
     # 🔷 1. Smoothed Line Chart
     # -------------------------------
-    st.subheader(f"📈 Past Year vs {selected_year} Forecast - Gem Usage Trend")
+    st.subheader(f"📈  {selected_year} Forecast - Gem Usage Trend")
 
     fig, ax = plt.subplots(figsize=(16, 7))
     x_actual = np.arange(len(past_year_actual))
