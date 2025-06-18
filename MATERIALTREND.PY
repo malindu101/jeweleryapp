@@ -14,7 +14,7 @@ st.title("🔧 Material Usage Forecasting (2026–2028)")
 def load_material_data():
     conn = snowflake.connector.connect(
         user="MOW101",
-        password="Killme@20021128123123",
+        password="",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
         database="SAPPHIRE",         # Same DB
