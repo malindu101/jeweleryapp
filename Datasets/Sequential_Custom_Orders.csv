@@ -1,0 +1,1001 @@
+id,user_id,gem_color,material,engraving,created_at
+1,623,Sapphire,Silver,,1/3/2020 13:00
+2,555,Sapphire,Silver,,1/5/2020 19:00
+3,140,Ruby,Gold,,1/6/2020 11:00
+4,841,Ruby,Rose Gold,My One & Only,1/6/2020 21:00
+5,123,Diamond,Silver,Forever Yours,1/7/2020 1:00
+6,370,Ruby,Gold,,1/7/2020 9:00
+7,264,Sapphire,Gold,,1/7/2020 16:00
+8,344,Emerald,Gold,,1/9/2020 7:00
+9,777,Diamond,Rose Gold,,1/15/2020 16:00
+10,459,Ruby,Rose Gold,Happy Anniversary,1/15/2020 19:00
+11,749,Ruby,Silver,Love Always,1/16/2020 8:00
+12,382,Sapphire,Silver,For Eternity,1/18/2020 23:00
+13,499,Sapphire,Gold,Love Always,1/22/2020 0:00
+14,732,Diamond,Rose Gold,,1/22/2020 5:00
+15,191,Emerald,Rose Gold,,1/24/2020 3:00
+16,334,Diamond,Gold,Forever Yours,1/25/2020 12:00
+17,513,Sapphire,Rose Gold,To My Queen,1/29/2020 13:00
+18,652,Diamond,Rose Gold,Forever Yours,1/30/2020 6:00
+19,787,Emerald,Rose Gold,Forever Yours,2/4/2020 6:00
+20,337,Sapphire,Rose Gold,,2/6/2020 3:00
+21,435,Diamond,Silver,Love Always,2/7/2020 7:00
+22,291,Diamond,Gold,To My Queen,2/7/2020 12:00
+23,667,Sapphire,Rose Gold,,2/7/2020 16:00
+24,657,Diamond,Silver,,2/8/2020 1:00
+25,654,Sapphire,Rose Gold,,2/8/2020 8:00
+26,889,Sapphire,Gold,,2/9/2020 12:00
+27,975,Diamond,Gold,Happy Anniversary,2/11/2020 21:00
+28,179,Diamond,Rose Gold,Love Always,2/14/2020 9:00
+29,294,Diamond,Rose Gold,,2/14/2020 15:00
+30,174,Diamond,Gold,,2/21/2020 7:00
+31,155,Emerald,Rose Gold,Happy Anniversary,2/22/2020 17:00
+32,887,Diamond,Gold,Forever Yours,2/24/2020 1:00
+33,108,Emerald,Rose Gold,To My Queen,2/26/2020 14:00
+34,292,Emerald,Gold,To My Queen,2/27/2020 17:00
+35,937,Ruby,Gold,,3/3/2020 2:00
+36,839,Emerald,Rose Gold,To My Queen,3/3/2020 19:00
+37,745,Diamond,Silver,Happy Anniversary,3/9/2020 10:00
+38,356,Ruby,Rose Gold,,3/13/2020 0:00
+39,873,Emerald,Gold,For Eternity,3/14/2020 5:00
+40,846,Ruby,Rose Gold,Forever Yours,3/18/2020 22:00
+41,848,Sapphire,Rose Gold,,3/20/2020 20:00
+42,534,Ruby,Rose Gold,,3/21/2020 1:00
+43,134,Ruby,Gold,Love Always,3/24/2020 5:00
+44,697,Ruby,Gold,,3/29/2020 0:00
+45,716,Emerald,Rose Gold,,3/29/2020 8:00
+46,155,Ruby,Silver,For Eternity,3/29/2020 15:00
+47,204,Sapphire,Gold,To My Queen,3/31/2020 2:00
+48,681,Emerald,Gold,For Eternity,4/2/2020 18:00
+49,569,Emerald,Rose Gold,Forever Yours,4/4/2020 1:00
+50,236,Ruby,Gold,Love Always,4/4/2020 21:00
+51,639,Emerald,Gold,Love Always,4/6/2020 17:00
+52,354,Sapphire,Rose Gold,For Eternity,4/7/2020 21:00
+53,501,Ruby,Rose Gold,,4/12/2020 23:00
+54,731,Emerald,Rose Gold,,4/16/2020 9:00
+55,278,Emerald,Rose Gold,For Eternity,4/17/2020 18:00
+56,221,Emerald,Rose Gold,,4/18/2020 4:00
+57,873,Emerald,Gold,,4/21/2020 7:00
+58,241,Diamond,Gold,My One & Only,4/25/2020 4:00
+59,381,Emerald,Gold,My One & Only,4/26/2020 10:00
+60,870,Diamond,Gold,,5/2/2020 9:00
+61,314,Diamond,Silver,For Eternity,5/4/2020 7:00
+62,496,Sapphire,Gold,,5/7/2020 12:00
+63,560,Sapphire,Gold,,5/7/2020 23:00
+64,713,Emerald,Silver,To My Queen,5/9/2020 9:00
+65,246,Sapphire,Rose Gold,For Eternity,5/10/2020 20:00
+66,124,Ruby,Gold,To My Queen,5/11/2020 23:00
+67,853,Diamond,Gold,Forever Yours,5/14/2020 22:00
+68,867,Sapphire,Silver,,5/16/2020 0:00
+69,827,Sapphire,Gold,,5/16/2020 18:00
+70,899,Emerald,Gold,,5/19/2020 23:00
+71,937,Diamond,Rose Gold,Happy Anniversary,5/21/2020 8:00
+72,714,Sapphire,Rose Gold,For Eternity,5/22/2020 9:00
+73,250,Diamond,Gold,My One & Only,5/22/2020 14:00
+74,274,Emerald,Rose Gold,For Eternity,5/23/2020 8:00
+75,944,Ruby,Silver,To My Queen,5/25/2020 4:00
+76,239,Ruby,Gold,My One & Only,5/25/2020 17:00
+77,189,Ruby,Rose Gold,,5/25/2020 19:00
+78,537,Emerald,Silver,For Eternity,5/26/2020 22:00
+79,201,Sapphire,Silver,Love Always,5/27/2020 14:00
+80,427,Diamond,Gold,For Eternity,5/28/2020 10:00
+81,727,Ruby,Silver,For Eternity,5/30/2020 23:00
+82,280,Diamond,Silver,For Eternity,6/2/2020 6:00
+83,333,Diamond,Silver,Forever Yours,6/2/2020 19:00
+84,866,Ruby,Rose Gold,,6/5/2020 5:00
+85,518,Emerald,Silver,,6/5/2020 17:00
+86,306,Diamond,Silver,Love Always,6/5/2020 19:00
+87,666,Diamond,Gold,,6/13/2020 15:00
+88,191,Emerald,Silver,,6/13/2020 16:00
+89,160,Emerald,Gold,My One & Only,6/14/2020 17:00
+90,156,Emerald,Rose Gold,Love Always,6/17/2020 3:00
+91,600,Ruby,Gold,To My Queen,6/18/2020 2:00
+92,505,Emerald,Rose Gold,For Eternity,6/18/2020 15:00
+93,943,Emerald,Silver,To My Queen,6/20/2020 4:00
+94,515,Emerald,Silver,Happy Anniversary,6/20/2020 8:00
+95,528,Emerald,Rose Gold,,6/21/2020 14:00
+96,459,Emerald,Silver,To My Queen,6/22/2020 20:00
+97,248,Sapphire,Gold,,6/23/2020 3:00
+98,873,Ruby,Gold,Happy Anniversary,6/23/2020 15:00
+99,694,Emerald,Silver,,6/24/2020 12:00
+100,592,Diamond,Silver,Happy Anniversary,6/24/2020 23:00
+101,944,Emerald,Gold,Forever Yours,6/25/2020 1:00
+102,163,Sapphire,Rose Gold,For Eternity,6/25/2020 9:00
+103,840,Ruby,Silver,,6/26/2020 1:00
+104,843,Ruby,Gold,For Eternity,6/29/2020 0:00
+105,757,Sapphire,Silver,Forever Yours,6/30/2020 12:00
+106,399,Emerald,Gold,To My Queen,7/3/2020 9:00
+107,493,Ruby,Rose Gold,,7/7/2020 16:00
+108,518,Emerald,Rose Gold,Happy Anniversary,7/10/2020 5:00
+109,532,Ruby,Gold,Love Always,7/11/2020 5:00
+110,752,Diamond,Silver,My One & Only,7/16/2020 12:00
+111,932,Ruby,Silver,Happy Anniversary,7/18/2020 3:00
+112,892,Emerald,Silver,Love Always,7/20/2020 13:00
+113,765,Sapphire,Silver,,7/21/2020 19:00
+114,120,Sapphire,Silver,,7/24/2020 11:00
+115,824,Emerald,Silver,,7/25/2020 4:00
+116,711,Ruby,Rose Gold,To My Queen,7/26/2020 7:00
+117,752,Sapphire,Gold,For Eternity,7/28/2020 14:00
+118,511,Sapphire,Silver,Forever Yours,7/28/2020 22:00
+119,983,Ruby,Silver,,7/30/2020 18:00
+120,610,Diamond,Rose Gold,To My Queen,7/31/2020 2:00
+121,338,Ruby,Rose Gold,,8/4/2020 3:00
+122,504,Emerald,Silver,,8/6/2020 9:00
+123,920,Emerald,Rose Gold,For Eternity,8/6/2020 23:00
+124,232,Emerald,Gold,,8/7/2020 4:00
+125,732,Diamond,Silver,My One & Only,8/7/2020 15:00
+126,257,Emerald,Rose Gold,Forever Yours,8/12/2020 12:00
+127,423,Sapphire,Gold,,8/20/2020 15:00
+128,420,Sapphire,Gold,,8/21/2020 14:00
+129,540,Sapphire,Gold,My One & Only,8/23/2020 23:00
+130,616,Ruby,Gold,,8/24/2020 10:00
+131,720,Diamond,Gold,,8/27/2020 8:00
+132,814,Diamond,Silver,Forever Yours,8/29/2020 8:00
+133,437,Ruby,Rose Gold,,8/29/2020 22:00
+134,301,Ruby,Rose Gold,,8/30/2020 15:00
+135,362,Sapphire,Gold,,8/31/2020 14:00
+136,505,Sapphire,Silver,Love Always,9/13/2020 15:00
+137,397,Sapphire,Silver,Happy Anniversary,9/14/2020 6:00
+138,200,Ruby,Silver,,9/16/2020 10:00
+139,328,Emerald,Gold,To My Queen,9/17/2020 18:00
+140,544,Sapphire,Silver,Forever Yours,9/19/2020 2:00
+141,694,Diamond,Gold,,9/23/2020 8:00
+142,104,Diamond,Gold,,9/25/2020 9:00
+143,639,Ruby,Rose Gold,Forever Yours,9/25/2020 13:00
+144,913,Sapphire,Silver,,9/26/2020 19:00
+145,153,Diamond,Silver,,9/28/2020 3:00
+146,243,Ruby,Rose Gold,Happy Anniversary,9/28/2020 19:00
+147,764,Sapphire,Silver,,9/29/2020 17:00
+148,271,Ruby,Silver,,9/30/2020 14:00
+149,297,Ruby,Gold,My One & Only,10/6/2020 11:00
+150,871,Emerald,Rose Gold,,10/6/2020 14:00
+151,885,Ruby,Silver,Love Always,10/7/2020 8:00
+152,585,Emerald,Rose Gold,For Eternity,10/8/2020 9:00
+153,832,Emerald,Rose Gold,,10/11/2020 22:00
+154,108,Sapphire,Silver,My One & Only,10/12/2020 10:00
+155,605,Ruby,Silver,My One & Only,10/15/2020 12:00
+156,225,Emerald,Gold,,10/17/2020 14:00
+157,824,Ruby,Gold,,10/18/2020 8:00
+158,715,Ruby,Gold,,10/21/2020 20:00
+159,539,Emerald,Silver,,10/24/2020 3:00
+160,299,Sapphire,Gold,My One & Only,10/24/2020 23:00
+161,500,Emerald,Gold,,10/26/2020 17:00
+162,258,Emerald,Silver,,10/26/2020 19:00
+163,468,Diamond,Rose Gold,Love Always,10/27/2020 17:00
+164,473,Diamond,Gold,To My Queen,10/31/2020 20:00
+165,838,Emerald,Gold,For Eternity,11/3/2020 4:00
+166,984,Emerald,Rose Gold,Love Always,11/13/2020 8:00
+167,185,Sapphire,Rose Gold,To My Queen,11/15/2020 19:00
+168,139,Diamond,Gold,To My Queen,11/16/2020 12:00
+169,569,Emerald,Rose Gold,To My Queen,11/19/2020 2:00
+170,140,Sapphire,Silver,My One & Only,11/20/2020 7:00
+171,995,Ruby,Silver,,11/21/2020 8:00
+172,745,Sapphire,Rose Gold,For Eternity,11/21/2020 13:00
+173,811,Ruby,Rose Gold,Forever Yours,11/25/2020 11:00
+174,810,Diamond,Rose Gold,Forever Yours,11/26/2020 9:00
+175,786,Ruby,Rose Gold,Forever Yours,11/27/2020 4:00
+176,804,Sapphire,Silver,My One & Only,11/30/2020 19:00
+177,369,Sapphire,Silver,,12/3/2020 1:00
+178,154,Ruby,Rose Gold,Love Always,12/4/2020 10:00
+179,914,Ruby,Gold,For Eternity,12/5/2020 12:00
+180,905,Diamond,Rose Gold,,12/5/2020 15:00
+181,268,Emerald,Gold,To My Queen,12/7/2020 13:00
+182,840,Emerald,Gold,,12/8/2020 7:00
+183,417,Ruby,Silver,,12/9/2020 14:00
+184,334,Sapphire,Gold,Forever Yours,12/10/2020 7:00
+185,694,Emerald,Rose Gold,To My Queen,12/11/2020 23:00
+186,977,Diamond,Rose Gold,My One & Only,12/12/2020 6:00
+187,705,Diamond,Silver,Happy Anniversary,12/14/2020 6:00
+188,404,Sapphire,Gold,To My Queen,12/15/2020 18:00
+189,604,Diamond,Silver,Forever Yours,12/16/2020 5:00
+190,420,Ruby,Silver,For Eternity,12/21/2020 15:00
+191,435,Sapphire,Rose Gold,To My Queen,12/22/2020 14:00
+192,768,Sapphire,Silver,Happy Anniversary,12/22/2020 17:00
+193,247,Sapphire,Rose Gold,Love Always,12/24/2020 8:00
+194,960,Diamond,Rose Gold,Love Always,12/24/2020 12:00
+195,180,Diamond,Silver,,12/31/2020 15:00
+196,944,Emerald,Silver,To My Queen,1/12/2021 11:00
+197,935,Emerald,Silver,My One & Only,1/12/2021 13:00
+198,327,Diamond,Silver,,1/13/2021 4:00
+199,968,Ruby,Gold,,1/15/2021 8:00
+200,971,Ruby,Rose Gold,To My Queen,1/17/2021 18:00
+201,202,Sapphire,Silver,,1/18/2021 5:00
+202,852,Ruby,Rose Gold,,1/19/2021 4:00
+203,649,Diamond,Silver,For Eternity,1/20/2021 23:00
+204,344,Ruby,Rose Gold,For Eternity,1/22/2021 20:00
+205,288,Sapphire,Rose Gold,,1/25/2021 3:00
+206,186,Emerald,Gold,Happy Anniversary,1/31/2021 4:00
+207,279,Ruby,Gold,,2/3/2021 21:00
+208,877,Diamond,Silver,Happy Anniversary,2/5/2021 9:00
+209,766,Ruby,Rose Gold,,2/5/2021 13:00
+210,886,Sapphire,Silver,,2/7/2021 23:00
+211,853,Diamond,Rose Gold,,2/9/2021 2:00
+212,120,Emerald,Silver,For Eternity,2/10/2021 6:00
+213,160,Ruby,Rose Gold,,2/10/2021 15:00
+214,423,Sapphire,Silver,Forever Yours,2/11/2021 5:00
+215,277,Emerald,Silver,Happy Anniversary,2/11/2021 21:00
+216,725,Ruby,Rose Gold,,2/19/2021 5:00
+217,306,Sapphire,Gold,Love Always,2/20/2021 23:00
+218,679,Diamond,Gold,My One & Only,2/22/2021 8:00
+219,300,Diamond,Gold,,2/23/2021 3:00
+220,728,Ruby,Silver,Forever Yours,2/26/2021 13:00
+221,708,Diamond,Silver,To My Queen,2/28/2021 15:00
+222,228,Sapphire,Rose Gold,To My Queen,3/6/2021 11:00
+223,465,Diamond,Rose Gold,My One & Only,3/7/2021 5:00
+224,545,Ruby,Rose Gold,Love Always,3/12/2021 10:00
+225,330,Emerald,Gold,Happy Anniversary,3/14/2021 3:00
+226,329,Sapphire,Gold,For Eternity,3/20/2021 20:00
+227,189,Sapphire,Silver,Happy Anniversary,3/22/2021 4:00
+228,208,Sapphire,Silver,,3/26/2021 14:00
+229,503,Ruby,Silver,,3/28/2021 17:00
+230,599,Emerald,Rose Gold,To My Queen,3/28/2021 23:00
+231,134,Sapphire,Silver,Love Always,3/29/2021 4:00
+232,742,Ruby,Rose Gold,For Eternity,3/30/2021 17:00
+233,489,Emerald,Gold,To My Queen,3/30/2021 19:00
+234,516,Diamond,Silver,For Eternity,3/31/2021 14:00
+235,680,Emerald,Rose Gold,,4/2/2021 20:00
+236,513,Ruby,Silver,To My Queen,4/5/2021 20:00
+237,658,Sapphire,Rose Gold,,4/7/2021 17:00
+238,109,Ruby,Gold,,4/11/2021 6:00
+239,235,Diamond,Gold,For Eternity,4/12/2021 17:00
+240,308,Ruby,Silver,My One & Only,4/14/2021 3:00
+241,111,Ruby,Silver,,4/17/2021 7:00
+242,322,Sapphire,Silver,My One & Only,4/17/2021 13:00
+243,701,Diamond,Rose Gold,For Eternity,4/18/2021 1:00
+244,839,Diamond,Rose Gold,,4/18/2021 4:00
+245,188,Ruby,Rose Gold,Love Always,4/23/2021 16:00
+246,509,Sapphire,Rose Gold,,4/24/2021 8:00
+247,951,Ruby,Gold,Love Always,4/27/2021 6:00
+248,985,Sapphire,Gold,,4/27/2021 9:00
+249,600,Diamond,Rose Gold,To My Queen,4/29/2021 16:00
+250,422,Diamond,Gold,,4/30/2021 4:00
+251,346,Emerald,Rose Gold,Happy Anniversary,5/1/2021 14:00
+252,525,Emerald,Gold,To My Queen,5/1/2021 15:00
+253,590,Sapphire,Silver,,5/3/2021 1:00
+254,829,Ruby,Gold,,5/4/2021 22:00
+255,693,Diamond,Gold,To My Queen,5/10/2021 19:00
+256,869,Ruby,Gold,,5/18/2021 7:00
+257,753,Ruby,Gold,,5/20/2021 20:00
+258,643,Emerald,Silver,,5/24/2021 14:00
+259,343,Emerald,Gold,My One & Only,5/25/2021 17:00
+260,270,Diamond,Silver,,5/26/2021 1:00
+261,218,Ruby,Gold,For Eternity,5/26/2021 7:00
+262,579,Ruby,Rose Gold,To My Queen,5/26/2021 9:00
+263,444,Ruby,Rose Gold,My One & Only,5/27/2021 14:00
+264,114,Ruby,Silver,Forever Yours,5/30/2021 20:00
+265,265,Sapphire,Gold,For Eternity,5/30/2021 23:00
+266,838,Ruby,Gold,Love Always,6/3/2021 15:00
+267,950,Sapphire,Rose Gold,,6/4/2021 10:00
+268,887,Sapphire,Gold,Love Always,6/4/2021 11:00
+269,877,Emerald,Rose Gold,To My Queen,6/6/2021 1:00
+270,184,Diamond,Gold,Love Always,6/6/2021 2:00
+271,512,Diamond,Silver,My One & Only,6/6/2021 9:00
+272,958,Ruby,Gold,Happy Anniversary,6/6/2021 23:00
+273,154,Sapphire,Silver,For Eternity,6/7/2021 8:00
+274,745,Ruby,Silver,Happy Anniversary,6/8/2021 2:00
+275,886,Ruby,Silver,,6/8/2021 15:00
+276,450,Emerald,Silver,,6/12/2021 1:00
+277,543,Ruby,Gold,To My Queen,6/14/2021 11:00
+278,100,Sapphire,Silver,Love Always,6/14/2021 12:00
+279,605,Diamond,Rose Gold,To My Queen,6/15/2021 0:00
+280,776,Diamond,Silver,Love Always,6/15/2021 15:00
+281,649,Diamond,Rose Gold,,6/15/2021 18:00
+282,536,Ruby,Rose Gold,For Eternity,6/17/2021 0:00
+283,946,Ruby,Gold,Forever Yours,6/17/2021 6:00
+284,667,Diamond,Gold,Forever Yours,6/17/2021 8:00
+285,397,Sapphire,Gold,To My Queen,6/18/2021 2:00
+286,508,Emerald,Rose Gold,Happy Anniversary,6/19/2021 11:00
+287,175,Sapphire,Rose Gold,,6/20/2021 3:00
+288,740,Diamond,Rose Gold,My One & Only,6/24/2021 6:00
+289,680,Ruby,Silver,For Eternity,6/24/2021 16:00
+290,165,Emerald,Silver,For Eternity,6/24/2021 17:00
+291,258,Emerald,Silver,Love Always,6/26/2021 16:00
+292,703,Emerald,Silver,Forever Yours,6/26/2021 19:00
+293,424,Emerald,Rose Gold,Forever Yours,6/30/2021 5:00
+294,558,Sapphire,Silver,,7/1/2021 23:00
+295,356,Sapphire,Gold,Happy Anniversary,7/8/2021 19:00
+296,441,Ruby,Gold,Forever Yours,7/10/2021 8:00
+297,388,Emerald,Rose Gold,Happy Anniversary,7/13/2021 23:00
+298,991,Emerald,Silver,,7/18/2021 7:00
+299,443,Diamond,Gold,,7/20/2021 1:00
+300,966,Emerald,Silver,,7/20/2021 9:00
+301,874,Emerald,Gold,Love Always,7/20/2021 18:00
+302,739,Diamond,Rose Gold,,7/22/2021 2:00
+303,433,Diamond,Gold,To My Queen,7/24/2021 21:00
+304,749,Sapphire,Rose Gold,,7/25/2021 15:00
+305,570,Emerald,Silver,Happy Anniversary,7/30/2021 8:00
+306,546,Diamond,Gold,Happy Anniversary,8/3/2021 5:00
+307,366,Emerald,Gold,Love Always,8/3/2021 20:00
+308,540,Sapphire,Gold,Love Always,8/4/2021 20:00
+309,289,Diamond,Silver,For Eternity,8/6/2021 22:00
+310,681,Emerald,Gold,For Eternity,8/7/2021 0:00
+311,525,Diamond,Rose Gold,For Eternity,8/8/2021 11:00
+312,364,Ruby,Rose Gold,My One & Only,8/9/2021 14:00
+313,214,Sapphire,Gold,Forever Yours,8/10/2021 4:00
+314,505,Diamond,Gold,,8/10/2021 14:00
+315,775,Sapphire,Gold,For Eternity,8/12/2021 4:00
+316,756,Ruby,Silver,For Eternity,8/12/2021 17:00
+317,326,Emerald,Gold,To My Queen,8/13/2021 22:00
+318,897,Sapphire,Rose Gold,,8/15/2021 9:00
+319,272,Diamond,Silver,My One & Only,8/15/2021 18:00
+320,870,Sapphire,Gold,For Eternity,8/21/2021 6:00
+321,700,Sapphire,Gold,My One & Only,8/22/2021 20:00
+322,436,Diamond,Gold,To My Queen,8/25/2021 11:00
+323,987,Sapphire,Rose Gold,,8/26/2021 9:00
+324,831,Ruby,Gold,To My Queen,8/27/2021 0:00
+325,704,Sapphire,Rose Gold,Happy Anniversary,8/27/2021 9:00
+326,619,Ruby,Gold,,8/29/2021 10:00
+327,508,Ruby,Gold,,9/1/2021 0:00
+328,191,Ruby,Rose Gold,,9/1/2021 16:00
+329,359,Diamond,Gold,Happy Anniversary,9/2/2021 8:00
+330,964,Ruby,Rose Gold,My One & Only,9/3/2021 2:00
+331,597,Diamond,Rose Gold,,9/3/2021 6:00
+332,169,Diamond,Rose Gold,,9/4/2021 5:00
+333,634,Sapphire,Gold,,9/8/2021 1:00
+334,838,Ruby,Silver,Happy Anniversary,9/9/2021 21:00
+335,570,Diamond,Gold,To My Queen,9/9/2021 23:00
+336,909,Diamond,Silver,,9/11/2021 5:00
+337,646,Diamond,Silver,,9/14/2021 1:00
+338,538,Ruby,Silver,My One & Only,9/14/2021 8:00
+339,776,Diamond,Rose Gold,,9/16/2021 16:00
+340,833,Sapphire,Gold,,9/21/2021 19:00
+341,838,Diamond,Rose Gold,To My Queen,9/22/2021 6:00
+342,520,Diamond,Gold,,9/22/2021 14:00
+343,244,Ruby,Gold,,9/25/2021 13:00
+344,527,Ruby,Silver,,9/26/2021 2:00
+345,773,Diamond,Silver,Forever Yours,9/26/2021 8:00
+346,280,Diamond,Rose Gold,Love Always,9/27/2021 0:00
+347,448,Emerald,Gold,,10/2/2021 22:00
+348,771,Emerald,Silver,,10/3/2021 2:00
+349,993,Emerald,Silver,To My Queen,10/3/2021 20:00
+350,287,Sapphire,Rose Gold,For Eternity,10/5/2021 2:00
+351,270,Ruby,Gold,For Eternity,10/8/2021 17:00
+352,382,Emerald,Gold,,10/10/2021 10:00
+353,915,Diamond,Gold,Love Always,10/10/2021 14:00
+354,118,Diamond,Rose Gold,,10/15/2021 3:00
+355,141,Ruby,Silver,Forever Yours,10/20/2021 4:00
+356,610,Emerald,Rose Gold,,10/20/2021 22:00
+357,860,Emerald,Rose Gold,Forever Yours,10/22/2021 21:00
+358,994,Emerald,Gold,,10/24/2021 14:00
+359,528,Sapphire,Silver,Happy Anniversary,10/24/2021 22:00
+360,658,Diamond,Gold,,10/25/2021 18:00
+361,549,Diamond,Silver,,10/31/2021 13:00
+362,151,Ruby,Gold,,11/1/2021 5:00
+363,458,Sapphire,Rose Gold,Forever Yours,11/1/2021 6:00
+364,882,Ruby,Gold,,11/4/2021 1:00
+365,354,Sapphire,Silver,For Eternity,11/5/2021 5:00
+366,105,Sapphire,Rose Gold,Forever Yours,11/5/2021 19:00
+367,212,Ruby,Silver,For Eternity,11/6/2021 9:00
+368,128,Ruby,Silver,,11/7/2021 7:00
+369,411,Ruby,Rose Gold,To My Queen,11/7/2021 18:00
+370,257,Ruby,Rose Gold,,11/9/2021 10:00
+371,601,Diamond,Silver,My One & Only,11/10/2021 12:00
+372,587,Diamond,Rose Gold,Happy Anniversary,11/11/2021 7:00
+373,526,Diamond,Gold,My One & Only,11/11/2021 22:00
+374,906,Ruby,Silver,,11/12/2021 21:00
+375,109,Sapphire,Rose Gold,Love Always,11/14/2021 12:00
+376,808,Emerald,Gold,Forever Yours,11/17/2021 17:00
+377,403,Diamond,Gold,Love Always,11/20/2021 9:00
+378,228,Sapphire,Rose Gold,,11/20/2021 21:00
+379,547,Sapphire,Rose Gold,,11/22/2021 19:00
+380,996,Sapphire,Gold,,11/23/2021 7:00
+381,146,Diamond,Gold,,11/23/2021 12:00
+382,167,Sapphire,Rose Gold,,11/24/2021 4:00
+383,207,Sapphire,Gold,Forever Yours,11/30/2021 12:00
+384,673,Diamond,Silver,Happy Anniversary,11/30/2021 22:00
+385,495,Ruby,Rose Gold,,12/2/2021 3:00
+386,193,Sapphire,Silver,,12/2/2021 11:00
+387,462,Ruby,Silver,,12/6/2021 0:00
+388,177,Emerald,Gold,My One & Only,12/7/2021 21:00
+389,409,Ruby,Rose Gold,For Eternity,12/10/2021 0:00
+390,614,Emerald,Silver,For Eternity,12/13/2021 0:00
+391,321,Sapphire,Silver,,12/13/2021 10:00
+392,752,Diamond,Silver,Happy Anniversary,12/14/2021 17:00
+393,442,Diamond,Silver,,12/16/2021 1:00
+394,489,Sapphire,Silver,To My Queen,12/16/2021 19:00
+395,308,Sapphire,Silver,Happy Anniversary,12/20/2021 0:00
+396,414,Emerald,Gold,,12/20/2021 5:00
+397,865,Ruby,Silver,,12/22/2021 6:00
+398,948,Diamond,Gold,,12/24/2021 0:00
+399,674,Ruby,Rose Gold,Happy Anniversary,12/25/2021 17:00
+400,223,Emerald,Gold,,12/26/2021 11:00
+401,751,Sapphire,Rose Gold,,12/27/2021 19:00
+402,480,Diamond,Rose Gold,For Eternity,1/2/2022 2:00
+403,453,Ruby,Rose Gold,Forever Yours,1/2/2022 16:00
+404,975,Sapphire,Rose Gold,Love Always,1/2/2022 21:00
+405,570,Ruby,Silver,To My Queen,1/8/2022 1:00
+406,795,Diamond,Silver,,1/8/2022 23:00
+407,293,Sapphire,Gold,,1/9/2022 14:00
+408,774,Emerald,Gold,Love Always,1/11/2022 6:00
+409,274,Ruby,Rose Gold,,1/12/2022 1:00
+410,333,Emerald,Gold,Forever Yours,1/14/2022 3:00
+411,762,Ruby,Silver,My One & Only,1/17/2022 22:00
+412,117,Sapphire,Rose Gold,,1/18/2022 13:00
+413,511,Ruby,Rose Gold,For Eternity,1/19/2022 11:00
+414,555,Sapphire,Gold,Love Always,1/23/2022 6:00
+415,110,Diamond,Silver,To My Queen,1/23/2022 15:00
+416,493,Ruby,Rose Gold,To My Queen,1/25/2022 13:00
+417,588,Ruby,Silver,My One & Only,1/27/2022 22:00
+418,889,Emerald,Silver,,2/1/2022 20:00
+419,925,Emerald,Gold,,2/2/2022 11:00
+420,802,Diamond,Gold,Love Always,2/3/2022 4:00
+421,570,Emerald,Rose Gold,My One & Only,2/3/2022 11:00
+422,813,Sapphire,Rose Gold,,2/5/2022 22:00
+423,548,Ruby,Silver,My One & Only,2/8/2022 14:00
+424,226,Diamond,Gold,,2/11/2022 13:00
+425,315,Sapphire,Rose Gold,,2/15/2022 12:00
+426,269,Emerald,Rose Gold,Happy Anniversary,2/16/2022 14:00
+427,295,Sapphire,Rose Gold,,2/21/2022 12:00
+428,259,Diamond,Rose Gold,,2/21/2022 15:00
+429,916,Emerald,Silver,My One & Only,2/22/2022 9:00
+430,788,Emerald,Rose Gold,,2/23/2022 18:00
+431,500,Sapphire,Gold,,2/26/2022 23:00
+432,725,Ruby,Rose Gold,To My Queen,2/28/2022 1:00
+433,519,Ruby,Gold,,3/2/2022 3:00
+434,970,Sapphire,Gold,,3/2/2022 14:00
+435,642,Diamond,Gold,Love Always,3/4/2022 15:00
+436,597,Emerald,Silver,For Eternity,3/7/2022 17:00
+437,344,Diamond,Rose Gold,For Eternity,3/8/2022 19:00
+438,305,Diamond,Rose Gold,Forever Yours,3/11/2022 14:00
+439,607,Sapphire,Silver,Happy Anniversary,3/13/2022 8:00
+440,520,Sapphire,Silver,Forever Yours,3/16/2022 5:00
+441,819,Ruby,Gold,To My Queen,3/16/2022 16:00
+442,658,Diamond,Rose Gold,,3/17/2022 3:00
+443,118,Emerald,Silver,,3/17/2022 19:00
+444,339,Sapphire,Rose Gold,Love Always,3/21/2022 7:00
+445,232,Ruby,Silver,For Eternity,3/23/2022 16:00
+446,254,Emerald,Silver,Forever Yours,4/1/2022 4:00
+447,207,Diamond,Gold,To My Queen,4/1/2022 7:00
+448,534,Sapphire,Gold,My One & Only,4/3/2022 0:00
+449,722,Diamond,Rose Gold,Happy Anniversary,4/3/2022 17:00
+450,406,Emerald,Silver,To My Queen,4/3/2022 21:00
+451,755,Ruby,Gold,Happy Anniversary,4/4/2022 13:00
+452,462,Emerald,Rose Gold,,4/8/2022 6:00
+453,617,Sapphire,Gold,,4/10/2022 17:00
+454,196,Sapphire,Rose Gold,,4/11/2022 6:00
+455,628,Sapphire,Gold,My One & Only,4/13/2022 15:00
+456,810,Diamond,Gold,Forever Yours,4/15/2022 21:00
+457,865,Emerald,Gold,My One & Only,4/18/2022 0:00
+458,932,Sapphire,Gold,Love Always,4/18/2022 3:00
+459,558,Diamond,Gold,Love Always,4/20/2022 15:00
+460,309,Emerald,Rose Gold,Happy Anniversary,4/20/2022 23:00
+461,580,Ruby,Gold,Forever Yours,4/21/2022 12:00
+462,570,Emerald,Gold,Love Always,4/24/2022 23:00
+463,925,Ruby,Silver,,4/26/2022 3:00
+464,788,Ruby,Silver,Happy Anniversary,4/27/2022 17:00
+465,147,Emerald,Gold,,4/27/2022 21:00
+466,835,Diamond,Gold,For Eternity,4/28/2022 4:00
+467,174,Ruby,Silver,For Eternity,4/30/2022 7:00
+468,419,Emerald,Rose Gold,Happy Anniversary,5/2/2022 4:00
+469,658,Diamond,Gold,To My Queen,5/4/2022 18:00
+470,125,Ruby,Rose Gold,,5/5/2022 15:00
+471,990,Diamond,Silver,,5/9/2022 9:00
+472,885,Emerald,Gold,,5/11/2022 16:00
+473,608,Sapphire,Silver,Happy Anniversary,5/13/2022 6:00
+474,830,Emerald,Gold,,5/14/2022 14:00
+475,204,Ruby,Gold,,5/15/2022 13:00
+476,158,Diamond,Silver,,5/16/2022 9:00
+477,850,Sapphire,Rose Gold,Forever Yours,5/17/2022 5:00
+478,610,Sapphire,Rose Gold,Love Always,5/25/2022 14:00
+479,136,Ruby,Gold,,5/25/2022 16:00
+480,916,Emerald,Rose Gold,,5/27/2022 13:00
+481,502,Sapphire,Rose Gold,My One & Only,5/29/2022 10:00
+482,815,Sapphire,Rose Gold,,6/3/2022 21:00
+483,684,Emerald,Silver,My One & Only,6/14/2022 8:00
+484,431,Ruby,Silver,Love Always,6/15/2022 5:00
+485,802,Sapphire,Gold,,6/19/2022 23:00
+486,274,Sapphire,Silver,To My Queen,6/27/2022 3:00
+487,129,Ruby,Rose Gold,My One & Only,6/28/2022 17:00
+488,566,Ruby,Gold,My One & Only,6/28/2022 19:00
+489,486,Sapphire,Gold,Forever Yours,6/30/2022 4:00
+490,612,Ruby,Rose Gold,,7/2/2022 12:00
+491,200,Emerald,Rose Gold,For Eternity,7/3/2022 7:00
+492,468,Sapphire,Rose Gold,,7/3/2022 16:00
+493,142,Ruby,Silver,For Eternity,7/4/2022 17:00
+494,526,Diamond,Gold,Love Always,7/11/2022 22:00
+495,546,Diamond,Gold,,7/14/2022 1:00
+496,662,Sapphire,Silver,,7/14/2022 3:00
+497,805,Sapphire,Gold,Forever Yours,7/17/2022 22:00
+498,303,Ruby,Rose Gold,Happy Anniversary,7/18/2022 3:00
+499,470,Ruby,Silver,Love Always,7/18/2022 7:00
+500,769,Emerald,Silver,My One & Only,7/18/2022 21:00
+501,547,Sapphire,Gold,Happy Anniversary,7/20/2022 3:00
+502,123,Sapphire,Silver,,7/24/2022 8:00
+503,872,Emerald,Rose Gold,For Eternity,7/25/2022 10:00
+504,903,Sapphire,Silver,,7/28/2022 14:00
+505,231,Emerald,Gold,,7/30/2022 10:00
+506,372,Ruby,Rose Gold,,7/30/2022 13:00
+507,603,Diamond,Gold,My One & Only,7/31/2022 3:00
+508,972,Emerald,Silver,,8/2/2022 2:00
+509,296,Emerald,Silver,,8/2/2022 19:00
+510,701,Emerald,Silver,For Eternity,8/6/2022 0:00
+511,583,Diamond,Rose Gold,For Eternity,8/7/2022 13:00
+512,789,Emerald,Silver,To My Queen,8/8/2022 2:00
+513,352,Diamond,Gold,Forever Yours,8/8/2022 4:00
+514,149,Ruby,Silver,For Eternity,8/8/2022 11:00
+515,491,Diamond,Rose Gold,Forever Yours,8/9/2022 0:00
+516,729,Sapphire,Rose Gold,,8/11/2022 2:00
+517,576,Diamond,Silver,Forever Yours,8/11/2022 13:00
+518,884,Emerald,Silver,My One & Only,8/12/2022 5:00
+519,781,Diamond,Silver,Happy Anniversary,8/15/2022 17:00
+520,678,Sapphire,Gold,Forever Yours,8/16/2022 15:00
+521,544,Emerald,Silver,,8/17/2022 10:00
+522,999,Diamond,Rose Gold,,8/20/2022 5:00
+523,825,Ruby,Gold,,8/21/2022 6:00
+524,290,Ruby,Silver,Happy Anniversary,8/24/2022 8:00
+525,633,Ruby,Gold,,8/24/2022 15:00
+526,458,Diamond,Gold,My One & Only,8/26/2022 10:00
+527,912,Emerald,Gold,My One & Only,8/31/2022 7:00
+528,471,Emerald,Silver,,8/31/2022 10:00
+529,693,Sapphire,Silver,Love Always,8/31/2022 13:00
+530,737,Emerald,Gold,My One & Only,9/5/2022 0:00
+531,181,Diamond,Rose Gold,,9/8/2022 12:00
+532,755,Emerald,Rose Gold,For Eternity,9/11/2022 7:00
+533,603,Diamond,Rose Gold,For Eternity,9/12/2022 4:00
+534,820,Emerald,Rose Gold,For Eternity,9/12/2022 16:00
+535,100,Ruby,Rose Gold,Forever Yours,9/14/2022 21:00
+536,594,Emerald,Rose Gold,,9/16/2022 12:00
+537,876,Sapphire,Rose Gold,Forever Yours,9/18/2022 16:00
+538,109,Sapphire,Rose Gold,My One & Only,9/25/2022 6:00
+539,525,Diamond,Silver,To My Queen,9/25/2022 8:00
+540,977,Ruby,Silver,Love Always,10/2/2022 7:00
+541,947,Emerald,Silver,,10/4/2022 11:00
+542,544,Sapphire,Silver,,10/5/2022 17:00
+543,915,Sapphire,Silver,Love Always,10/6/2022 8:00
+544,285,Diamond,Rose Gold,,10/6/2022 23:00
+545,779,Diamond,Rose Gold,My One & Only,10/9/2022 14:00
+546,931,Diamond,Silver,,10/10/2022 5:00
+547,182,Sapphire,Rose Gold,,10/11/2022 3:00
+548,409,Sapphire,Gold,,10/13/2022 18:00
+549,879,Ruby,Silver,Love Always,10/17/2022 16:00
+550,909,Ruby,Gold,For Eternity,10/18/2022 23:00
+551,923,Ruby,Rose Gold,,10/21/2022 15:00
+552,788,Sapphire,Silver,,10/22/2022 14:00
+553,345,Ruby,Rose Gold,,10/22/2022 20:00
+554,700,Emerald,Silver,My One & Only,10/23/2022 18:00
+555,590,Diamond,Silver,Happy Anniversary,10/26/2022 19:00
+556,854,Diamond,Silver,,10/26/2022 22:00
+557,508,Diamond,Gold,Forever Yours,10/27/2022 6:00
+558,565,Sapphire,Gold,,10/28/2022 8:00
+559,706,Sapphire,Rose Gold,Love Always,10/28/2022 21:00
+560,752,Diamond,Gold,Happy Anniversary,10/29/2022 16:00
+561,496,Diamond,Rose Gold,,10/31/2022 10:00
+562,714,Diamond,Gold,,11/5/2022 5:00
+563,872,Ruby,Rose Gold,My One & Only,11/7/2022 5:00
+564,956,Sapphire,Gold,My One & Only,11/7/2022 8:00
+565,519,Emerald,Gold,,11/7/2022 9:00
+566,388,Emerald,Gold,For Eternity,11/11/2022 4:00
+567,371,Ruby,Rose Gold,,11/11/2022 7:00
+568,370,Diamond,Silver,Love Always,11/17/2022 19:00
+569,490,Sapphire,Rose Gold,,11/20/2022 7:00
+570,458,Sapphire,Rose Gold,,11/22/2022 5:00
+571,656,Sapphire,Rose Gold,,11/27/2022 23:00
+572,591,Diamond,Rose Gold,To My Queen,11/28/2022 1:00
+573,501,Diamond,Gold,,12/1/2022 6:00
+574,195,Emerald,Rose Gold,,12/4/2022 11:00
+575,273,Ruby,Rose Gold,For Eternity,12/10/2022 4:00
+576,908,Emerald,Silver,Happy Anniversary,12/19/2022 18:00
+577,154,Ruby,Silver,,12/22/2022 13:00
+578,990,Ruby,Rose Gold,,12/24/2022 14:00
+579,433,Ruby,Silver,,12/27/2022 0:00
+580,997,Sapphire,Rose Gold,To My Queen,12/27/2022 12:00
+581,890,Diamond,Silver,Love Always,12/29/2022 2:00
+582,970,Sapphire,Rose Gold,Happy Anniversary,12/29/2022 23:00
+583,864,Sapphire,Gold,Love Always,12/30/2022 0:00
+584,469,Sapphire,Rose Gold,,12/30/2022 1:00
+585,651,Diamond,Rose Gold,To My Queen,1/3/2023 5:00
+586,752,Ruby,Gold,Happy Anniversary,1/3/2023 23:00
+587,366,Ruby,Silver,,1/4/2023 17:00
+588,294,Sapphire,Rose Gold,My One & Only,1/5/2023 4:00
+589,547,Diamond,Silver,,1/11/2023 0:00
+590,229,Diamond,Silver,Love Always,1/11/2023 23:00
+591,665,Emerald,Silver,,1/12/2023 6:00
+592,684,Ruby,Gold,To My Queen,1/12/2023 18:00
+593,206,Diamond,Silver,,1/13/2023 15:00
+594,119,Sapphire,Rose Gold,For Eternity,1/15/2023 1:00
+595,888,Diamond,Rose Gold,My One & Only,1/15/2023 21:00
+596,402,Emerald,Gold,Forever Yours,1/20/2023 1:00
+597,559,Emerald,Silver,,1/20/2023 20:00
+598,112,Diamond,Silver,Forever Yours,1/21/2023 0:00
+599,987,Diamond,Silver,To My Queen,1/22/2023 0:00
+600,651,Ruby,Rose Gold,,1/30/2023 16:00
+601,177,Ruby,Rose Gold,,2/1/2023 16:00
+602,657,Ruby,Gold,To My Queen,2/6/2023 21:00
+603,803,Ruby,Rose Gold,Happy Anniversary,2/8/2023 16:00
+604,898,Emerald,Rose Gold,,2/9/2023 4:00
+605,466,Diamond,Silver,Forever Yours,2/10/2023 23:00
+606,842,Ruby,Rose Gold,Forever Yours,2/11/2023 7:00
+607,455,Diamond,Rose Gold,To My Queen,2/12/2023 12:00
+608,636,Sapphire,Gold,Happy Anniversary,2/14/2023 3:00
+609,266,Emerald,Gold,,2/16/2023 10:00
+610,810,Emerald,Rose Gold,,2/21/2023 8:00
+611,833,Emerald,Rose Gold,Forever Yours,2/21/2023 22:00
+612,845,Sapphire,Silver,Love Always,2/22/2023 4:00
+613,585,Sapphire,Silver,For Eternity,2/22/2023 5:00
+614,176,Sapphire,Gold,For Eternity,3/5/2023 1:00
+615,337,Ruby,Rose Gold,Forever Yours,3/5/2023 12:00
+616,567,Diamond,Silver,Love Always,3/5/2023 20:00
+617,697,Diamond,Silver,To My Queen,3/11/2023 7:00
+618,818,Emerald,Gold,,3/16/2023 17:00
+619,303,Emerald,Rose Gold,My One & Only,3/18/2023 10:00
+620,202,Ruby,Rose Gold,Love Always,3/25/2023 3:00
+621,928,Emerald,Silver,,3/26/2023 3:00
+622,778,Ruby,Rose Gold,,3/26/2023 4:00
+623,867,Diamond,Gold,To My Queen,3/28/2023 9:00
+624,835,Emerald,Gold,Happy Anniversary,4/4/2023 1:00
+625,727,Diamond,Silver,,4/8/2023 18:00
+626,762,Diamond,Gold,Love Always,4/10/2023 20:00
+627,871,Diamond,Rose Gold,For Eternity,4/11/2023 23:00
+628,975,Emerald,Silver,Happy Anniversary,4/20/2023 18:00
+629,223,Diamond,Silver,,4/22/2023 3:00
+630,126,Sapphire,Gold,For Eternity,4/23/2023 6:00
+631,192,Sapphire,Rose Gold,,4/23/2023 8:00
+632,270,Ruby,Silver,,4/23/2023 20:00
+633,170,Sapphire,Rose Gold,,4/25/2023 10:00
+634,492,Ruby,Gold,Forever Yours,4/26/2023 22:00
+635,930,Emerald,Silver,My One & Only,5/3/2023 23:00
+636,415,Emerald,Gold,,5/6/2023 17:00
+637,107,Ruby,Rose Gold,My One & Only,5/7/2023 6:00
+638,932,Diamond,Gold,,5/9/2023 20:00
+639,789,Diamond,Gold,To My Queen,5/13/2023 17:00
+640,819,Sapphire,Gold,For Eternity,5/15/2023 6:00
+641,313,Emerald,Rose Gold,,5/15/2023 14:00
+642,416,Ruby,Rose Gold,,5/20/2023 19:00
+643,498,Sapphire,Gold,My One & Only,5/24/2023 19:00
+644,291,Diamond,Silver,Love Always,5/29/2023 8:00
+645,843,Ruby,Silver,To My Queen,5/30/2023 12:00
+646,594,Diamond,Rose Gold,For Eternity,5/30/2023 13:00
+647,172,Emerald,Rose Gold,,6/11/2023 22:00
+648,853,Emerald,Gold,,6/12/2023 1:00
+649,281,Diamond,Rose Gold,For Eternity,6/12/2023 3:00
+650,872,Ruby,Silver,Forever Yours,6/16/2023 0:00
+651,152,Sapphire,Gold,,6/16/2023 8:00
+652,415,Ruby,Rose Gold,,6/21/2023 15:00
+653,889,Ruby,Silver,,6/25/2023 4:00
+654,231,Sapphire,Rose Gold,,6/27/2023 0:00
+655,357,Diamond,Gold,My One & Only,6/30/2023 18:00
+656,413,Emerald,Rose Gold,,7/1/2023 15:00
+657,306,Ruby,Silver,,7/2/2023 13:00
+658,201,Diamond,Gold,,7/3/2023 2:00
+659,906,Diamond,Silver,,7/7/2023 11:00
+660,535,Diamond,Rose Gold,,7/9/2023 4:00
+661,223,Emerald,Rose Gold,For Eternity,7/10/2023 17:00
+662,274,Ruby,Rose Gold,My One & Only,7/14/2023 9:00
+663,534,Ruby,Gold,Forever Yours,7/19/2023 10:00
+664,147,Ruby,Gold,Happy Anniversary,7/21/2023 18:00
+665,905,Diamond,Gold,,7/22/2023 2:00
+666,802,Ruby,Silver,Happy Anniversary,7/22/2023 14:00
+667,307,Emerald,Silver,,7/23/2023 19:00
+668,175,Diamond,Silver,Happy Anniversary,7/29/2023 23:00
+669,716,Emerald,Rose Gold,,7/30/2023 23:00
+670,719,Diamond,Silver,,7/31/2023 9:00
+671,944,Sapphire,Rose Gold,,8/3/2023 4:00
+672,195,Emerald,Rose Gold,,8/7/2023 6:00
+673,837,Emerald,Gold,To My Queen,8/10/2023 0:00
+674,768,Sapphire,Gold,Happy Anniversary,8/11/2023 15:00
+675,595,Emerald,Silver,For Eternity,8/12/2023 10:00
+676,156,Diamond,Silver,,8/14/2023 11:00
+677,848,Sapphire,Rose Gold,Happy Anniversary,8/14/2023 17:00
+678,200,Ruby,Gold,Love Always,8/15/2023 13:00
+679,548,Diamond,Rose Gold,,8/21/2023 14:00
+680,993,Diamond,Silver,Love Always,8/23/2023 16:00
+681,224,Sapphire,Silver,,8/27/2023 16:00
+682,211,Sapphire,Silver,For Eternity,8/28/2023 18:00
+683,459,Emerald,Rose Gold,Happy Anniversary,8/30/2023 1:00
+684,647,Ruby,Gold,Love Always,9/1/2023 1:00
+685,993,Diamond,Rose Gold,,9/1/2023 23:00
+686,306,Ruby,Gold,Happy Anniversary,9/5/2023 9:00
+687,882,Emerald,Silver,My One & Only,9/7/2023 16:00
+688,148,Ruby,Rose Gold,,9/7/2023 22:00
+689,157,Diamond,Gold,,9/9/2023 2:00
+690,115,Diamond,Rose Gold,Forever Yours,9/9/2023 7:00
+691,954,Diamond,Silver,Happy Anniversary,9/9/2023 20:00
+692,918,Sapphire,Rose Gold,Love Always,9/11/2023 9:00
+693,970,Diamond,Silver,To My Queen,9/11/2023 17:00
+694,684,Emerald,Silver,For Eternity,9/12/2023 3:00
+695,762,Emerald,Silver,,9/13/2023 0:00
+696,305,Emerald,Gold,My One & Only,9/14/2023 1:00
+697,843,Ruby,Silver,,9/18/2023 9:00
+698,862,Emerald,Gold,Forever Yours,9/19/2023 12:00
+699,907,Ruby,Rose Gold,,9/23/2023 1:00
+700,316,Emerald,Rose Gold,For Eternity,9/23/2023 23:00
+701,602,Emerald,Rose Gold,Forever Yours,9/24/2023 11:00
+702,752,Ruby,Rose Gold,For Eternity,9/24/2023 16:00
+703,591,Sapphire,Rose Gold,,9/25/2023 20:00
+704,207,Diamond,Silver,,9/28/2023 8:00
+705,143,Ruby,Gold,Love Always,9/30/2023 18:00
+706,655,Diamond,Silver,Forever Yours,10/4/2023 15:00
+707,914,Ruby,Gold,To My Queen,10/10/2023 11:00
+708,415,Ruby,Rose Gold,,10/11/2023 19:00
+709,444,Ruby,Gold,Happy Anniversary,10/12/2023 15:00
+710,840,Emerald,Gold,For Eternity,10/14/2023 9:00
+711,548,Sapphire,Rose Gold,To My Queen,10/14/2023 20:00
+712,419,Diamond,Gold,,10/17/2023 0:00
+713,935,Ruby,Gold,,10/17/2023 16:00
+714,977,Diamond,Gold,My One & Only,10/17/2023 23:00
+715,194,Ruby,Silver,,10/19/2023 5:00
+716,905,Emerald,Gold,For Eternity,10/20/2023 12:00
+717,302,Emerald,Silver,Happy Anniversary,10/21/2023 8:00
+718,864,Sapphire,Silver,,10/22/2023 7:00
+719,756,Emerald,Rose Gold,Forever Yours,10/27/2023 12:00
+720,822,Diamond,Gold,,11/3/2023 21:00
+721,220,Diamond,Silver,,11/9/2023 19:00
+722,579,Ruby,Silver,To My Queen,11/10/2023 20:00
+723,438,Sapphire,Silver,,11/13/2023 5:00
+724,565,Diamond,Silver,Happy Anniversary,11/15/2023 22:00
+725,989,Ruby,Silver,,11/17/2023 18:00
+726,193,Sapphire,Silver,,11/19/2023 22:00
+727,623,Sapphire,Gold,Happy Anniversary,11/20/2023 23:00
+728,278,Ruby,Rose Gold,Happy Anniversary,11/25/2023 17:00
+729,682,Diamond,Gold,My One & Only,11/26/2023 15:00
+730,329,Ruby,Silver,,11/29/2023 11:00
+731,277,Sapphire,Rose Gold,Happy Anniversary,11/30/2023 7:00
+732,291,Sapphire,Silver,For Eternity,12/3/2023 10:00
+733,421,Emerald,Rose Gold,,12/3/2023 22:00
+734,825,Sapphire,Rose Gold,To My Queen,12/5/2023 4:00
+735,902,Diamond,Silver,Forever Yours,12/5/2023 17:00
+736,757,Sapphire,Silver,,12/8/2023 21:00
+737,142,Diamond,Gold,,12/10/2023 5:00
+738,401,Ruby,Rose Gold,Happy Anniversary,12/11/2023 20:00
+739,989,Ruby,Rose Gold,Forever Yours,12/12/2023 8:00
+740,815,Emerald,Rose Gold,,12/15/2023 23:00
+741,539,Emerald,Silver,,12/16/2023 2:00
+742,446,Diamond,Rose Gold,,12/18/2023 16:00
+743,385,Emerald,Gold,To My Queen,12/20/2023 4:00
+744,151,Ruby,Rose Gold,Happy Anniversary,12/22/2023 9:00
+745,795,Diamond,Silver,To My Queen,12/22/2023 20:00
+746,127,Ruby,Silver,,12/23/2023 15:00
+747,617,Emerald,Silver,,12/25/2023 19:00
+748,276,Sapphire,Rose Gold,Love Always,12/28/2023 23:00
+749,979,Emerald,Rose Gold,Happy Anniversary,12/29/2023 3:00
+750,894,Sapphire,Rose Gold,My One & Only,12/30/2023 15:00
+751,516,Emerald,Rose Gold,,12/31/2023 18:00
+752,278,Ruby,Gold,Forever Yours,1/3/2024 7:00
+753,769,Ruby,Rose Gold,For Eternity,1/3/2024 17:00
+754,521,Ruby,Silver,Forever Yours,1/5/2024 7:00
+755,942,Ruby,Rose Gold,To My Queen,1/6/2024 9:00
+756,644,Emerald,Silver,,1/8/2024 8:00
+757,655,Sapphire,Rose Gold,,1/10/2024 0:00
+758,775,Diamond,Silver,,1/10/2024 11:00
+759,951,Sapphire,Silver,,1/12/2024 20:00
+760,420,Diamond,Rose Gold,,1/13/2024 4:00
+761,668,Ruby,Gold,To My Queen,1/14/2024 20:00
+762,714,Diamond,Rose Gold,Happy Anniversary,1/15/2024 3:00
+763,719,Diamond,Gold,To My Queen,1/20/2024 7:00
+764,899,Diamond,Gold,To My Queen,1/20/2024 11:00
+765,641,Sapphire,Rose Gold,,1/21/2024 10:00
+766,176,Diamond,Silver,Love Always,1/22/2024 19:00
+767,690,Sapphire,Silver,,1/22/2024 21:00
+768,476,Diamond,Rose Gold,,1/24/2024 1:00
+769,318,Emerald,Rose Gold,To My Queen,1/24/2024 5:00
+770,261,Sapphire,Rose Gold,For Eternity,1/24/2024 16:00
+771,474,Emerald,Gold,For Eternity,1/24/2024 18:00
+772,240,Sapphire,Gold,Happy Anniversary,1/25/2024 5:00
+773,664,Sapphire,Gold,Happy Anniversary,1/25/2024 14:00
+774,535,Emerald,Silver,,1/26/2024 16:00
+775,984,Emerald,Gold,,1/27/2024 8:00
+776,403,Emerald,Silver,,2/1/2024 2:00
+777,884,Sapphire,Rose Gold,,2/1/2024 19:00
+778,641,Diamond,Silver,My One & Only,2/1/2024 20:00
+779,643,Diamond,Silver,To My Queen,2/3/2024 0:00
+780,443,Ruby,Gold,To My Queen,2/5/2024 11:00
+781,634,Emerald,Gold,,2/13/2024 18:00
+782,804,Emerald,Gold,,2/17/2024 15:00
+783,353,Diamond,Rose Gold,My One & Only,2/19/2024 0:00
+784,852,Ruby,Silver,,2/21/2024 13:00
+785,210,Emerald,Silver,My One & Only,2/23/2024 6:00
+786,231,Emerald,Gold,,2/24/2024 0:00
+787,386,Diamond,Silver,For Eternity,2/25/2024 20:00
+788,981,Diamond,Rose Gold,Forever Yours,2/25/2024 23:00
+789,976,Diamond,Silver,,2/28/2024 9:00
+790,635,Sapphire,Silver,For Eternity,3/4/2024 20:00
+791,764,Emerald,Rose Gold,,3/5/2024 13:00
+792,388,Sapphire,Silver,My One & Only,3/10/2024 20:00
+793,101,Sapphire,Gold,Happy Anniversary,3/11/2024 2:00
+794,371,Ruby,Rose Gold,,3/12/2024 21:00
+795,407,Sapphire,Gold,Forever Yours,3/15/2024 20:00
+796,246,Emerald,Gold,To My Queen,3/16/2024 1:00
+797,335,Ruby,Rose Gold,,3/16/2024 22:00
+798,610,Emerald,Rose Gold,Happy Anniversary,3/18/2024 2:00
+799,952,Ruby,Silver,To My Queen,3/19/2024 18:00
+800,536,Sapphire,Rose Gold,For Eternity,3/19/2024 20:00
+801,413,Sapphire,Gold,Happy Anniversary,3/22/2024 15:00
+802,716,Diamond,Rose Gold,,3/24/2024 1:00
+803,343,Sapphire,Rose Gold,,3/24/2024 20:00
+804,354,Sapphire,Rose Gold,Happy Anniversary,3/27/2024 21:00
+805,450,Emerald,Rose Gold,Happy Anniversary,4/2/2024 7:00
+806,969,Ruby,Rose Gold,Happy Anniversary,4/8/2024 22:00
+807,271,Emerald,Silver,To My Queen,4/10/2024 23:00
+808,738,Ruby,Silver,My One & Only,4/13/2024 3:00
+809,542,Ruby,Silver,,4/15/2024 8:00
+810,548,Emerald,Silver,,4/18/2024 3:00
+811,648,Emerald,Gold,My One & Only,4/21/2024 16:00
+812,605,Emerald,Rose Gold,,4/22/2024 5:00
+813,549,Diamond,Rose Gold,,4/24/2024 12:00
+814,790,Emerald,Gold,,4/29/2024 14:00
+815,226,Sapphire,Rose Gold,To My Queen,5/1/2024 21:00
+816,533,Sapphire,Rose Gold,To My Queen,5/11/2024 18:00
+817,642,Diamond,Silver,Love Always,5/15/2024 23:00
+818,444,Ruby,Rose Gold,To My Queen,5/16/2024 13:00
+819,727,Diamond,Rose Gold,For Eternity,5/17/2024 23:00
+820,681,Emerald,Silver,Forever Yours,5/19/2024 9:00
+821,976,Ruby,Gold,,5/19/2024 14:00
+822,922,Diamond,Silver,Forever Yours,5/23/2024 5:00
+823,633,Diamond,Rose Gold,Love Always,5/23/2024 23:00
+824,833,Diamond,Rose Gold,,5/24/2024 14:00
+825,572,Ruby,Gold,,5/26/2024 6:00
+826,963,Sapphire,Rose Gold,Love Always,5/26/2024 22:00
+827,934,Emerald,Gold,My One & Only,5/27/2024 22:00
+828,336,Diamond,Rose Gold,,5/28/2024 11:00
+829,231,Diamond,Rose Gold,,6/6/2024 16:00
+830,999,Emerald,Gold,For Eternity,6/8/2024 4:00
+831,569,Ruby,Gold,Love Always,6/8/2024 22:00
+832,260,Sapphire,Silver,To My Queen,6/9/2024 3:00
+833,147,Ruby,Rose Gold,,6/12/2024 7:00
+834,587,Emerald,Rose Gold,,6/15/2024 5:00
+835,520,Diamond,Gold,To My Queen,6/19/2024 3:00
+836,486,Sapphire,Silver,To My Queen,6/19/2024 7:00
+837,304,Emerald,Rose Gold,,6/24/2024 2:00
+838,624,Ruby,Gold,,6/25/2024 19:00
+839,334,Emerald,Silver,Love Always,6/26/2024 21:00
+840,296,Diamond,Rose Gold,To My Queen,6/27/2024 8:00
+841,803,Emerald,Gold,Happy Anniversary,6/28/2024 19:00
+842,637,Ruby,Gold,,6/29/2024 2:00
+843,233,Emerald,Gold,,6/29/2024 23:00
+844,473,Ruby,Silver,Forever Yours,7/2/2024 0:00
+845,110,Diamond,Rose Gold,Forever Yours,7/3/2024 13:00
+846,577,Ruby,Gold,To My Queen,7/8/2024 0:00
+847,819,Diamond,Gold,Forever Yours,7/8/2024 15:00
+848,621,Sapphire,Rose Gold,,7/11/2024 2:00
+849,573,Sapphire,Gold,,7/11/2024 10:00
+850,414,Sapphire,Rose Gold,,7/12/2024 14:00
+851,570,Emerald,Silver,Love Always,7/13/2024 15:00
+852,800,Diamond,Rose Gold,,7/14/2024 13:00
+853,240,Sapphire,Rose Gold,,7/16/2024 23:00
+854,924,Sapphire,Gold,My One & Only,7/17/2024 10:00
+855,575,Emerald,Gold,,7/18/2024 13:00
+856,195,Diamond,Silver,Forever Yours,7/21/2024 8:00
+857,701,Emerald,Gold,To My Queen,7/22/2024 12:00
+858,123,Diamond,Rose Gold,My One & Only,7/23/2024 21:00
+859,928,Emerald,Rose Gold,My One & Only,7/24/2024 20:00
+860,469,Emerald,Gold,Love Always,7/29/2024 6:00
+861,802,Sapphire,Gold,,8/1/2024 5:00
+862,645,Sapphire,Rose Gold,For Eternity,8/1/2024 18:00
+863,576,Ruby,Rose Gold,,8/4/2024 1:00
+864,640,Emerald,Rose Gold,My One & Only,8/4/2024 2:00
+865,201,Sapphire,Gold,,8/4/2024 23:00
+866,835,Ruby,Gold,,8/9/2024 21:00
+867,552,Diamond,Gold,,8/11/2024 9:00
+868,990,Emerald,Rose Gold,Forever Yours,8/12/2024 0:00
+869,464,Sapphire,Silver,,8/13/2024 10:00
+870,366,Ruby,Rose Gold,,8/16/2024 7:00
+871,674,Diamond,Silver,Love Always,8/16/2024 8:00
+872,621,Emerald,Rose Gold,,8/19/2024 17:00
+873,453,Emerald,Silver,My One & Only,8/20/2024 7:00
+874,521,Ruby,Gold,,8/22/2024 1:00
+875,400,Diamond,Silver,,8/30/2024 21:00
+876,453,Ruby,Silver,My One & Only,8/31/2024 6:00
+877,210,Sapphire,Gold,,9/6/2024 5:00
+878,681,Diamond,Rose Gold,Forever Yours,9/6/2024 18:00
+879,185,Ruby,Gold,Happy Anniversary,9/6/2024 19:00
+880,201,Diamond,Gold,My One & Only,9/6/2024 21:00
+881,468,Sapphire,Rose Gold,For Eternity,9/7/2024 7:00
+882,722,Sapphire,Rose Gold,My One & Only,9/11/2024 0:00
+883,845,Emerald,Rose Gold,For Eternity,9/11/2024 4:00
+884,609,Sapphire,Rose Gold,Love Always,9/13/2024 8:00
+885,321,Emerald,Gold,For Eternity,9/14/2024 16:00
+886,111,Sapphire,Gold,,9/18/2024 1:00
+887,150,Emerald,Silver,,9/19/2024 20:00
+888,196,Diamond,Silver,,9/20/2024 15:00
+889,863,Ruby,Gold,,9/21/2024 6:00
+890,754,Diamond,Gold,,9/23/2024 22:00
+891,632,Emerald,Silver,,9/24/2024 23:00
+892,845,Diamond,Gold,,9/25/2024 19:00
+893,585,Sapphire,Silver,For Eternity,9/26/2024 20:00
+894,563,Diamond,Gold,,9/27/2024 7:00
+895,958,Ruby,Silver,Forever Yours,9/29/2024 14:00
+896,549,Sapphire,Gold,To My Queen,10/2/2024 16:00
+897,350,Diamond,Gold,To My Queen,10/9/2024 22:00
+898,753,Diamond,Gold,,10/14/2024 3:00
+899,303,Ruby,Silver,,10/14/2024 15:00
+900,899,Diamond,Rose Gold,,10/15/2024 19:00
+901,687,Ruby,Silver,My One & Only,10/20/2024 16:00
+902,784,Diamond,Rose Gold,For Eternity,10/24/2024 16:00
+903,117,Ruby,Rose Gold,,10/30/2024 21:00
+904,440,Sapphire,Gold,,11/4/2024 16:00
+905,324,Ruby,Rose Gold,Happy Anniversary,11/5/2024 11:00
+906,875,Diamond,Rose Gold,,11/9/2024 1:00
+907,497,Sapphire,Rose Gold,My One & Only,11/10/2024 11:00
+908,860,Emerald,Rose Gold,,11/14/2024 23:00
+909,567,Ruby,Rose Gold,Happy Anniversary,11/15/2024 12:00
+910,194,Ruby,Gold,,11/16/2024 11:00
+911,209,Ruby,Gold,My One & Only,11/17/2024 13:00
+912,588,Emerald,Gold,My One & Only,11/17/2024 15:00
+913,836,Ruby,Rose Gold,For Eternity,11/20/2024 13:00
+914,686,Diamond,Rose Gold,Love Always,11/23/2024 17:00
+915,398,Emerald,Gold,To My Queen,11/25/2024 8:00
+916,739,Emerald,Silver,,11/25/2024 16:00
+917,610,Diamond,Gold,Love Always,11/26/2024 12:00
+918,324,Sapphire,Gold,,11/26/2024 18:00
+919,515,Ruby,Rose Gold,For Eternity,11/28/2024 22:00
+920,973,Emerald,Rose Gold,,12/2/2024 6:00
+921,178,Ruby,Silver,My One & Only,12/6/2024 14:00
+922,614,Emerald,Rose Gold,My One & Only,12/11/2024 22:00
+923,156,Sapphire,Silver,,12/13/2024 4:00
+924,573,Diamond,Gold,,12/13/2024 12:00
+925,306,Ruby,Gold,Forever Yours,12/14/2024 12:00
+926,397,Diamond,Silver,,12/14/2024 19:00
+927,222,Ruby,Gold,Love Always,12/17/2024 7:00
+928,263,Emerald,Silver,Love Always,12/17/2024 22:00
+929,958,Emerald,Gold,,12/20/2024 4:00
+930,497,Diamond,Gold,,12/26/2024 8:00
+931,801,Emerald,Silver,Happy Anniversary,12/27/2024 9:00
+932,566,Sapphire,Rose Gold,,12/27/2024 11:00
+933,828,Diamond,Rose Gold,To My Queen,12/27/2024 13:00
+934,706,Ruby,Gold,,12/27/2024 18:00
+935,472,Diamond,Gold,,12/28/2024 20:00
+936,224,Ruby,Rose Gold,,1/1/2025 21:00
+937,187,Sapphire,Silver,Love Always,1/3/2025 18:00
+938,479,Diamond,Rose Gold,,1/6/2025 9:00
+939,716,Sapphire,Silver,,1/10/2025 23:00
+940,792,Sapphire,Gold,Love Always,1/11/2025 18:00
+941,654,Sapphire,Rose Gold,,1/11/2025 21:00
+942,610,Sapphire,Rose Gold,,1/17/2025 0:00
+943,879,Ruby,Silver,For Eternity,1/18/2025 20:00
+944,708,Diamond,Silver,,1/19/2025 13:00
+945,800,Ruby,Silver,Happy Anniversary,1/20/2025 11:00
+946,666,Ruby,Rose Gold,To My Queen,1/21/2025 11:00
+947,704,Sapphire,Rose Gold,Love Always,1/23/2025 0:00
+948,487,Emerald,Gold,Love Always,1/23/2025 13:00
+949,386,Ruby,Gold,,1/26/2025 17:00
+950,585,Sapphire,Silver,Love Always,1/27/2025 2:00
+951,575,Diamond,Gold,,1/30/2025 4:00
+952,798,Emerald,Silver,My One & Only,1/30/2025 7:00
+953,647,Ruby,Rose Gold,My One & Only,2/2/2025 10:00
+954,416,Emerald,Rose Gold,To My Queen,2/3/2025 22:00
+955,264,Sapphire,Silver,Happy Anniversary,2/6/2025 10:00
+956,557,Diamond,Silver,Love Always,2/7/2025 5:00
+957,597,Sapphire,Silver,,2/11/2025 9:00
+958,222,Diamond,Gold,For Eternity,2/18/2025 12:00
+959,490,Emerald,Silver,,2/19/2025 13:00
+960,785,Diamond,Rose Gold,Forever Yours,2/22/2025 18:00
+961,810,Emerald,Gold,,2/23/2025 16:00
+962,150,Emerald,Silver,My One & Only,2/24/2025 9:00
+963,189,Emerald,Gold,Happy Anniversary,2/26/2025 16:00
+964,269,Emerald,Silver,Love Always,3/3/2025 13:00
+965,937,Diamond,Silver,,3/4/2025 4:00
+966,933,Diamond,Rose Gold,,3/7/2025 10:00
+967,440,Ruby,Rose Gold,Love Always,3/7/2025 14:00
+968,607,Ruby,Gold,To My Queen,3/9/2025 5:00
+969,766,Emerald,Rose Gold,Happy Anniversary,3/9/2025 17:00
+970,123,Sapphire,Rose Gold,Love Always,3/13/2025 11:00
+971,395,Emerald,Gold,,3/13/2025 13:00
+972,307,Diamond,Gold,Forever Yours,3/15/2025 4:00
+973,937,Emerald,Gold,Love Always,3/16/2025 9:00
+974,901,Sapphire,Gold,For Eternity,3/18/2025 19:00
+975,656,Diamond,Gold,To My Queen,3/19/2025 12:00
+976,142,Ruby,Silver,Happy Anniversary,3/24/2025 7:00
+977,391,Sapphire,Gold,Love Always,4/4/2025 18:00
+978,139,Sapphire,Gold,,4/7/2025 2:00
+979,191,Emerald,Gold,Love Always,4/8/2025 4:00
+980,279,Sapphire,Gold,Happy Anniversary,4/17/2025 9:00
+981,179,Diamond,Rose Gold,Forever Yours,4/18/2025 20:00
+982,372,Emerald,Rose Gold,Forever Yours,4/27/2025 15:00
+983,201,Sapphire,Gold,,4/29/2025 0:00
+984,821,Emerald,Gold,To My Queen,4/30/2025 22:00
+985,539,Sapphire,Gold,,5/3/2025 22:00
+986,518,Diamond,Gold,My One & Only,5/9/2025 19:00
+987,891,Emerald,Rose Gold,To My Queen,5/11/2025 9:00
+988,948,Ruby,Rose Gold,,5/12/2025 0:00
+989,846,Diamond,Rose Gold,,5/14/2025 23:00
+990,172,Diamond,Silver,To My Queen,5/19/2025 17:00
+991,551,Sapphire,Gold,My One & Only,5/20/2025 5:00
+992,381,Diamond,Gold,,5/21/2025 2:00
+993,676,Emerald,Rose Gold,Happy Anniversary,5/21/2025 10:00
+994,911,Emerald,Gold,My One & Only,5/21/2025 15:00
+995,132,Ruby,Rose Gold,,5/21/2025 19:00
+996,356,Ruby,Gold,,5/21/2025 21:00
+997,442,Emerald,Rose Gold,Happy Anniversary,5/26/2025 19:00
+998,542,Sapphire,Gold,To My Queen,5/28/2025 7:00
+999,864,Emerald,Silver,Love Always,5/29/2025 11:00
+1000,382,Sapphire,Gold,For Eternity,5/30/2025 2:00
