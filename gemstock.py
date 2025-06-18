@@ -15,7 +15,7 @@ st.title("🔮 Gemstone Usage Forecast")
 def get_gem_data():
     conn = snowflake.connector.connect(
         user="MOW101",
-        password="Killme@20021128123123",
+        password="",
         account="KWLEACZ-DX82931",
         warehouse="COMPUTE_WH",
         database="SAPPHIRE",
